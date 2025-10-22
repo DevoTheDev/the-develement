@@ -37,7 +37,7 @@ const Header = (props: Props) => {
                                 subtype="menu"
                                 onClick={handleOpen}
                                 className='p-2 border-2 rounded-lg hover:opacity-85'
-                                iconSize={4}
+                                iconSize={3}
                             />
                         </CollapsibleTrigger>
                     </Collapsible>

@@ -91,7 +91,6 @@ const ExerciseForm = () => {
                                 <HookForm.Counter<ExerciseSchema>
                                     name="sets"
                                     label="Sets"
-
                                     min={0}
                                     max={99}
                                 />

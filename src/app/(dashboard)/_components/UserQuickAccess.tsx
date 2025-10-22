@@ -1,6 +1,6 @@
 "use client"
 
-import { ThemeToggle } from '@/components/theme-toggle'
+import { ThemeToggle } from '@/app/(dashboard)/_components/theme-toggle'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { LogOut } from 'lucide-react'

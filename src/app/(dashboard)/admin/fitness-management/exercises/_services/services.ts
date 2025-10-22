@@ -1,19 +1,24 @@
 "use server";
 
-import { ExerciseSchema } from "../_types/exerciseSchema";
+import { exerciseSchema, ExerciseSchema } from "../_types/exerciseSchema";
 import db from "@/lib/db";
 import { executeAction } from "@/lib/executeAction";
+import { toNumberSafe, toStringSafe } from "@/lib/utils";
 
 const createExercise = async (data: ExerciseSchema) => {
     await executeAction({
-        actionFn: () => db.exercise.create({
-            data: {
-                name: data.name,
-                description: data.description,
-                reps: data.reps,
-                sets: data.sets,
-            },
-        }),
+        actionFn: () => {
+            const validatedData = exerciseSchema.parse(data);
+
+            return db.exercise.create({
+                data: {
+                    name: validatedData.name,
+                    description: validatedData.description,
+                    reps: toNumberSafe(validatedData.reps),
+                    sets: toNumberSafe(validatedData.sets),
+                },
+            })
+        },
     });
 };
 
@@ -29,8 +34,8 @@ const getExercise = async (id: number): Promise<ExerciseSchema> => {
     return {
         name: res.name || "",
         description: res.description || "",
-        sets: res.sets || 1,
-        reps: res.reps || 1,
+        sets: toStringSafe(res.sets || 1),
+        reps: toStringSafe(res.reps || 1),
         action: "update",
         id,
     };
@@ -44,14 +49,13 @@ const updateExercise = async (data: ExerciseSchema) => {
                 data: {
                     name: data.name,
                     description: data.description,
-                    sets: data.sets,
-                    reps: data.reps,
+                    sets: toNumberSafe(data.sets),
+                    reps: toNumberSafe(data.reps),
                 },
             }),
         });
     }
 };
-
 
 const deleteExercise = async (id: number) => {
     await executeAction({

@@ -89,11 +89,11 @@ model User {
 // }
 
 model Exercise {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
-  description String
-  sets        Int
-  reps        Int
+  description String?
+  sets        Float?
+  reps        Float?
 }
 
 enum Role {

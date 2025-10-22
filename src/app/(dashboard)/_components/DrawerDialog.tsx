@@ -58,7 +58,7 @@ export function DrawerDialog({
                 <DialogTrigger suppressHydrationWarning asChild>
                     {trigger || 'Open Dialog'}
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent >
                     <DialogHeader>
                         <DialogTitle>{title}</DialogTitle>
                         <DialogDescription>

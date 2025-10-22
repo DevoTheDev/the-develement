@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
-import { AlertDialogProvider } from "./ui/alert-dialog-provider";
+import { AlertDialogProvider } from "../../../components/ui/alert-dialog-provider";
 
 type ProvidersProps = {
     children: ReactNode;
