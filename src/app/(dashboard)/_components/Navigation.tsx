@@ -60,7 +60,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen, groups }) => {
                         <AccordionContent forceMount className="h-full">
                             <div className="h-screen">
                                 <div className="flex items-center justify-center w-64 mt-12">
-                                    <h1 className="font-semibold mr-2">Navigation</h1>
+                                    <h1 className="font-semibold text-xl mr-2">Navigation</h1>
                                     <DevButton
                                         type="icon"
                                         subtype="chevronLeft"

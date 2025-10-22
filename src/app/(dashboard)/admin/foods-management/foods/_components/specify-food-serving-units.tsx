@@ -2,8 +2,8 @@ import { FoodSchema } from "@/app/(dashboard)/admin/foods-management/foods/_type
 import { ServingUnitFormDialog } from "@/app/(dashboard)/admin/foods-management/serving-units/_components/serving-unit-form-dialog";
 import { useServingUnits } from "@/app/(dashboard)/admin/foods-management/serving-units/_services/useQueries";
 import { Button } from "@/components/ui/button";
-import { ControlledInput } from "@/components/ui/controlled-input";
-import { ControlledSelect } from "@/components/ui/controlled-select";
+import { ControlledInput } from "@/components/ui/controlled/controlled-input";
+import { ControlledSelect } from "@/components/ui/controlled/controlled-select";
 import { CirclePlus, Trash2, UtensilsCrossed } from "lucide-react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
