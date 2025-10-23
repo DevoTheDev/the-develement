@@ -20,14 +20,12 @@ const ThemeToggle = () => {
                         type="icon"
                         subtype="sun"
                         tooltip="Select theme"
-                        iconSize={3}
                         className="p-2 flex items-center justify-center border-2 border-input rounded-lg hover:opacity-80 dark:hidden"
                     />
                     <DevButton
                         type="icon"
                         subtype="moon"
                         tooltip="Select theme"
-                        iconSize={3}
                         className="p-2 items-center justify-center border-2 border-input rounded-lg hover:opacity-80  hidden dark:flex"
                     />
                 </div>

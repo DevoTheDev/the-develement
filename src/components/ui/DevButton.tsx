@@ -87,7 +87,7 @@ export default function DevButton(props: DevButtonProps) {
         onClick,
         children,
         className,
-        iconSize,
+        iconSize = 4,
         icon,
         tooltip,
         ...rest

@@ -16,7 +16,7 @@ import {
 
 const UserQuickAccess = () => {
     return (
-        <div className="flex items-center">
+        <div className="flex items-center justify-between">
             <ThemeToggle />
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>

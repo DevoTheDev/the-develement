@@ -66,7 +66,6 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen, groups }) => {
                                         subtype="chevronLeft"
                                         onClick={handleClose}
                                         className='p-2 border-2 rounded-lg hover:opacity-85'
-                                        iconSize={3}
                                     />
                                 </div>
                                 <Separator className="my-8" />

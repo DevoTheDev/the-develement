@@ -1,19 +1,15 @@
 "use client";
 import { Collapsible, CollapsibleTrigger } from '@radix-ui/react-collapsible';
-import React from 'react';
+import React, { useState } from 'react';
 import UserQuickAccess from './UserQuickAccess';
 import Navigation from './Navigation';
-import { ROUTE_GROUPS } from './dashboard-layout';
 import DevButton from '@/components/ui/DevButton';
+import { ROUTE_GROUPS } from './dashboard-layout';
 
-type Props = {
-    open: boolean,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
 
-const Header = (props: Props) => {
+const Header = () => {
 
-    const { open, setOpen } = props;
+    const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(!open);
@@ -22,7 +18,7 @@ const Header = (props: Props) => {
     return (
         <>
             <div
-                className="bg-background fixed z-10 flex h-max w-screen items-center justify-between border px-2">
+                className="bg-background fixed z-10 flex h-max w-screen items-center justify-between border pl-2 top-0">
                 <div
                     className='flex items-center'>
                     <Collapsible
@@ -37,7 +33,6 @@ const Header = (props: Props) => {
                                 subtype="menu"
                                 onClick={handleOpen}
                                 className='p-2 border-2 rounded-lg hover:opacity-85'
-                                iconSize={3}
                             />
                         </CollapsibleTrigger>
                     </Collapsible>
