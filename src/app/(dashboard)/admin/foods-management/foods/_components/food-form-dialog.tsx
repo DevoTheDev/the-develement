@@ -92,7 +92,7 @@ const FoodFormDialog = () => {
                 setOpen: handleDialogOpenChange,
             }}
             title={selectedFoodId ? "Edit Food" : "Create a New Food"}
-            trigger={<DevButton type="icon" subtype="plus" label="New Food" className="flex gap-4 p-2" />}
+            trigger={<DevButton type="icon" subtype="plus" label="New Food" iconSize={4} className="flex gap-4 p-2" />}
             content={(
                 <form
                     onSubmit={disabledSubmit ? undefined : form.handleSubmit(onSubmit)}

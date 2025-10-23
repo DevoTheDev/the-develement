@@ -110,7 +110,7 @@ export default function DevButton(props: DevButtonProps) {
                 onClick={handleClick}
                 className={cn(className,
                     `hover:bg-background/70 transition-transform hover:scale-80 duration-250
-                    cursor-pointer`
+                    cursor-pointer items-center`
                 )}
             >
                 <Icon className={`w-${iconSize} h-${iconSize} opacity-80`} />
