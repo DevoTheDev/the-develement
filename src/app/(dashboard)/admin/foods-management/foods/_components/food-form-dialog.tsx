@@ -28,6 +28,7 @@ import { SpecifyFoodServingUnits } from "./specify-food-serving-units";
 import { DrawerDialog } from "@/app/(dashboard)/_components/DrawerDialog";
 import DevButton from "@/components/ui/DevButton";
 import { HookForm } from "@/components/ui/HookForm";
+import D_Button from "@/components/D_Components/D_Button";
 
 const FoodFormDialog = () => {
     const form = useForm<FoodSchema>({
@@ -92,11 +93,17 @@ const FoodFormDialog = () => {
                 setOpen: handleDialogOpenChange,
             }}
             title={selectedFoodId ? "Edit Food" : "Create a New Food"}
-            trigger={<DevButton type="icon" subtype="plus" label="New Food" iconSize={4} className="flex gap-4 p-2" />}
+            trigger={
+                <D_Button
+                    className="flex justify-center items-center py-2 px-4 mt-1 w-max gap-2 rounded-lg"
+                    icon="Plus"
+                    label="New Food"
+                    onMobile="hideLabel"
+                />}
             content={(
                 <form
                     onSubmit={disabledSubmit ? undefined : form.handleSubmit(onSubmit)}
-                    className=""
+                    className="overflow-y-scroll"
                 >
                     <FormProvider {...form}>
                         <div className="flex flex-col gap-4 mb-6">

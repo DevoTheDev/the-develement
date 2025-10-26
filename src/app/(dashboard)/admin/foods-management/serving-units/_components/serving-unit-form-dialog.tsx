@@ -1,5 +1,6 @@
 "use client";
 
+import { DrawerDialog } from "@/app/(dashboard)/_components/DrawerDialog";
 import { useServingUnitsStore } from "@/app/(dashboard)/admin/foods-management/serving-units/_libs/useServingUnitsStore";
 import {
   useCreateServingUnit,
@@ -11,6 +12,7 @@ import {
   servingUnitSchema,
   ServingUnitSchema,
 } from "@/app/(dashboard)/admin/foods-management/serving-units/_types/schema";
+import D_Button from "@/components/D_Components/D_Button";
 import { Button } from "@/components/ui/button";
 import { ControlledInput } from "@/components/ui/controlled/controlled-input";
 import {
@@ -81,27 +83,22 @@ const ServingUnitFormDialog = ({
     createServingUnitMutation.isPending || updateServingUnitMutation.isPending;
 
   return (
-    <Dialog open={servingUnitDialogOpen} onOpenChange={handleDialogOpenChange}>
-      <DialogTrigger asChild>
-        {smallTrigger ? (
-          <Button size="icon" variant="ghost" type="button">
-            <Plus />
-          </Button>
-        ) : (
-          <Button>
-            <Plus className="mr-2" />
-            New Serving Unit
-          </Button>
-        )}
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle className="text-2xl">
-            {selectedServingUnitId
-              ? "Edit Serving Unit"
-              : "Create a New Serving Unit"}
-          </DialogTitle>
-        </DialogHeader>
+    <DrawerDialog
+      openState={{
+        open: servingUnitDialogOpen,
+        setOpen: handleDialogOpenChange,
+      }}
+      title={selectedServingUnitId
+        ? "Edit Serving Unit"
+        : "Create a New Serving Unit"}
+      trigger={
+        <D_Button
+          className="flex justify-center items-center py-2 px-4 mt-1 w-max gap-2 rounded-lg"
+          icon="Plus"
+          label="New Serving Unit"
+          onMobile="hideLabel"
+        />}
+      content={(
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormProvider {...form}>
             <div className="grid grid-cols-2 gap-4">
@@ -120,8 +117,8 @@ const ServingUnitFormDialog = ({
             </Button>
           </DialogFooter>
         </form>
-      </DialogContent>
-    </Dialog>
+      )}
+    />
   );
 };
 

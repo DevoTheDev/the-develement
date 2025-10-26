@@ -7,7 +7,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import DevButton from "@/components/ui/DevButton";
+import D_Button from "@/components/D_Components/D_Button";
 
 const ThemeToggle = () => {
     const { setTheme } = useTheme();
@@ -16,17 +16,23 @@ const ThemeToggle = () => {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <div className="relative">
-                    <DevButton
-                        type="icon"
-                        subtype="sun"
+                    <D_Button
+                        iconSize={4}
+                        icon="Sun"
                         tooltip="Select theme"
-                        className="p-2 flex items-center justify-center border-2 border-input rounded-lg hover:opacity-80 dark:hidden"
+                        className={`
+                        p-2 flex items-center justify-center 
+                        border-2 border-input rounded-lg dark:hidden
+                        `}
                     />
-                    <DevButton
-                        type="icon"
-                        subtype="moon"
+                    <D_Button
+                        iconSize={4}
+                        icon="Moon"
                         tooltip="Select theme"
-                        className="p-2 items-center justify-center border-2 border-input rounded-lg hover:opacity-80  hidden dark:flex"
+                        className={`
+                        p-2 items-center justify-center 
+                        border-2 border-input rounded-lg hidden dark:flex
+                        `}
                     />
                 </div>
             </DropdownMenuTrigger>

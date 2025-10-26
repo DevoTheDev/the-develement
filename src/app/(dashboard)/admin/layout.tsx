@@ -11,7 +11,7 @@ const Layout = async ({ children }: LayoutProps) => {
     if (session.user?.role === Role.USER) redirect("/client");
     return (
         <div className="">
-            <Header />
+            <Header {...session} />
             {children}
         </div>
     );

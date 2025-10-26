@@ -1,21 +1,11 @@
-import { MealCards } from "@/app/(dashboard)/client/_components/meal-cards";
-import { MealFilters } from "@/app/(dashboard)/client/_components/meal-filters";
-import { MealFormDialog } from "@/app/(dashboard)/client/_components/meal-form-dialog";
-import { auth } from "@/lib/auth";
+import React from 'react'
 
-const Page = async () => {
-  const session = await auth();
-  if (!session) return null;
+type Props = {}
 
-  return (
-    <>
-      <div className="flex justify-between">
-        <MealFilters />
-        <MealFormDialog session={session} />
-      </div>
-      <MealCards />
-    </>
-  );
-};
+const page = (props: Props) => {
+    return (
+        <div>page</div>
+    )
+}
 
-export default Page;
+export default page

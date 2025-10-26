@@ -1,13 +1,13 @@
 "use client";
-
 import { ServingUnitCardsSkeleton } from "@/app/(dashboard)/admin/foods-management/serving-units/_components/serving-unit-skeletons";
 import { useServingUnitsStore } from "@/app/(dashboard)/admin/foods-management/serving-units/_libs/useServingUnitsStore";
 import { useDeleteServingUnit } from "@/app/(dashboard)/admin/foods-management/serving-units/_services/useMutations";
 import { useServingUnits } from "@/app/(dashboard)/admin/foods-management/serving-units/_services/useQueries";
 import { NoItemsFound } from "@/app/(dashboard)/_components/no-items-found";
-import { Button } from "@/components/ui/button";
 import { alert } from "@/lib/use-global-store";
-import { Edit, Trash } from "lucide-react";
+import D_Button from "@/components/D_Components/D_Button";
+import D_Card from "@/components/D_Components/D_Card";
+import { Separator } from "@radix-ui/react-separator";
 
 const ServingUnitCards = () => {
   const { updateSelectedServingUnitId, updateServingUnitDialogOpen } =
@@ -21,44 +21,45 @@ const ServingUnitCards = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
+    <div className="grid md:grid-cols-6 sm:grid-cols-4 grid-cols-1 gap-2">
       {servingUnitsQuery.isLoading ? (
         <ServingUnitCardsSkeleton />
       ) : (
         <>
           {servingUnitsQuery.data?.map((item) => (
-            <div
-              className="flex flex-col justify-between gap-3 rounded-lg border p-6"
+            <D_Card
+              className="p-4 border-1 rounded-lg gap-2"
               key={item.id}
-            >
-              <p className="truncate">{item.name}</p>
-              <div className="flex gap-1">
-                <Button
-                  className="size-6"
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => {
-                    updateSelectedServingUnitId(item.id);
-                    updateServingUnitDialogOpen(true);
-                  }}
-                >
-                  <Edit />
-                </Button>
-                <Button
-                  className="size-6"
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => {
-                    alert({
-                      onConfirm: () =>
-                        deleteServingUnitMutation.mutate(item.id),
-                    });
-                  }}
-                >
-                  <Trash />
-                </Button>
-              </div>
-            </div>
+              header={(
+                <>
+                  <div className="w-full">{item.name}</div>
+                  <Separator className="border-1 w-full" />
+                </>
+              )}
+              footer={(
+                <div className="w-full flex justify-end gap-3">
+                  <D_Button
+                    iconSize={4}
+                    className='p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-lg'
+                    onClick={() => {
+                      updateSelectedServingUnitId(item.id);
+                      updateServingUnitDialogOpen(true);
+                    }}
+                    tooltip="Edit"
+                    icon="Edit" />
+                  <D_Button
+                    iconSize={4}
+                    className='p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-lg'
+                    onClick={() => {
+                      alert({
+                        onConfirm: () => deleteServingUnitMutation.mutate(item.id),
+                      });
+                    }}
+                    tooltip="Delete"
+                    icon="Trash" />
+                </div>
+              )}
+            />
           ))}
         </>
       )}

@@ -1,19 +1,13 @@
 "use client";
-import { useState, ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@radix-ui/react-collapsible";
-import { ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
+import D_Button, { D_ButtonProps } from "@/components/D_Components/D_Button";
 
 export type RouteGroupType = {
     group: string;
-    items: {
-        href: string;
-        label: string;
-        icon: ReactNode;
-    }[];
+    items: D_ButtonProps[];
 };
 
 type RouteGroupListProps = {
@@ -28,15 +22,17 @@ const RouteGroup = ({ group, items, open }: RouteGroupProps) => {
     return (
         <Collapsible open={open}>
             <CollapsibleTrigger asChild>
-                <Button
-                    variant="ghost"
-                    className="w-full justify-between px-5 py-4" // Full width, consistent padding
-                >
-                    {group}
-                    <div className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}>
-                        <ChevronDown className="h-5 w-5" />
-                    </div>
-                </Button>
+                <div className={`
+                    w-full py-2 px-5 flex justify-between items-center
+                    `}>
+                    <D_Button
+                        label={group}
+                    />
+                    <D_Button
+                        icon="ChevronDown"
+                        className={`duration-300 ${open ? "rotate-180" : ""}`}
+                    />
+                </div>
             </CollapsibleTrigger>
             <CollapsibleContent>
                 <motion.div
@@ -46,15 +42,16 @@ const RouteGroup = ({ group, items, open }: RouteGroupProps) => {
                     transition={{ duration: 0.6, ease: "easeInOut" }}
                 >
                     {items.map((item) => (
-                        <div key={item.href} className="w-full">
-                            <Link
-                                className={`flex items-center rounded-md px-5 py-4 transition-all w-full
-                  ${pathname === item.href ? "bg-foreground/10 hover:bg-foreground/5" : "hover:bg-foreground/10"}`}
+                        <div key={item.href} className="w-full flex flex-col">
+                            <D_Button
+                                icon={item.icon}
                                 href={item.href}
-                            >
-                                {item.icon}
-                                <span className="text-sm ml-2">{item.label}</span>
-                            </Link>
+                                className={`flex items-center rounded-md px-5 py-3 transition-all w-full
+                                ${pathname === item.href ? "bg-foreground/10 hover:bg-foreground/5" : "hover:bg-foreground/10"}`}
+                                label={item.label}
+                                disableDefault
+
+                            />
                         </div>
                     ))}
                 </motion.div>
@@ -67,14 +64,17 @@ export const RouteGroupList = ({ groups }: RouteGroupListProps) => {
     const [openGroup, setOpenGroup] = useState<string | null>(null);
 
     return (
-        <div className="flex flex-col gap-8 w-full max-w-xs"> {/* Set max-width for consistency */}
+        <div className="flex flex-col gap-8 w-full max-w-xs ">
             {groups.map((group) => {
                 const isOpen = group.group === openGroup;
+                const idAdmin = JSON.stringify(group.items).includes('admin');
+                const idClient = JSON.stringify(group.items).includes('client');
+
 
                 return (
                     <div
                         key={group.group}
-                        onClick={() => setOpenGroup(isOpen ? null : group.group)} // Toggle open/close
+                        onClick={() => setOpenGroup(isOpen ? null : group.group)}
                         className="w-full"
                     >
                         <RouteGroup group={group.group} items={group.items} open={isOpen} />

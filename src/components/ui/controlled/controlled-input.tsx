@@ -24,7 +24,7 @@ const ControlledInput = <T extends FieldValues>({
     return (
         <div className={cn("w-full", containerClassName)}>
             {!!label && (
-                <Label className="mb-2" htmlFor={name}>
+                <Label className="mb-2 text-white/50" htmlFor={name}>
                     {label}
                 </Label>
             )}

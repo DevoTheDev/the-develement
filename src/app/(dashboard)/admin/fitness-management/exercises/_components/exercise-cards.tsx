@@ -29,7 +29,7 @@ const ExerciseCards = () => {
                             className="bg-background border-2 dark:shadow-white/30 shadow-md border-white/25 rounded-lg p-2"
                             key={item.id}
                             button1={{
-                                icon: "edit",
+                                icon: "Edit",
                                 iconSize: 5,
                                 tooltip: "Edit",
                                 onClick: () => {
@@ -39,7 +39,7 @@ const ExerciseCards = () => {
                                 },
                             }}
                             button2={{
-                                icon: "trash",
+                                icon: "Trash",
                                 iconSize: 5,
 
                                 tooltip: "Delete",

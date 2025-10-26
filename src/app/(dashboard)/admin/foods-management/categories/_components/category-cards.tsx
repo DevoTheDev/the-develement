@@ -7,6 +7,9 @@ import { useCategoriesStore } from "../_libs/use-category-store";
 import Card from "@/app/(dashboard)/_components/Card";
 import { CardsSkeleton } from "../../../../_components/CardsSkeleton";
 import { NoItemsFound } from "@/app/(dashboard)/_components/no-items-found";
+import D_Card from "@/components/D_Components/D_Card";
+import { Separator } from "@radix-ui/react-separator";
+import D_Button from "@/components/D_Components/D_Button";
 
 const CategoryCards = () => {
     const { updateSelectedCategoryId, updateCategoryDialogOpen } = useCategoriesStore();
@@ -19,39 +22,45 @@ const CategoryCards = () => {
     }
 
     return (
-        <div className="grid grid-cols-6 gap-2">
+        <div className="grid md:grid-cols-6 sm:grid-cols-4 grid-cols-1 gap-2">
             {categoriesQuery.isLoading ? (
                 <CardsSkeleton />
             ) : (
                 <>
                     {categoriesQuery.data?.map((item) => (
-                        <Card
-                            className="bg-background border-2 dark:shadow-white/30 shadow-md border-white/25 rounded-lg p-2"
+                        <D_Card
+                            className="p-4 border-1 rounded-lg gap-2"
                             key={item.id}
-                            button1={{
-                                icon: "edit",
-                                iconSize: 5,
-                                tooltip: "Edit",
-                                onClick: () => {
-                                    updateSelectedCategoryId(item.id);
-                                    updateCategoryDialogOpen(true);
-                                },
-                            }}
-                            button2={{
-                                icon: "trash",
-                                iconSize: 5,
-
-                                tooltip: "Delete",
-                                onClick: () => {
-                                    alert({
-                                        onConfirm: () => deleteCategoryMutation.mutate(item.id)
-                                    })
-                                }
-                            }}>
-                            <div className="truncate font-bold">
-                                {item.name}
-                            </div>
-                        </Card>
+                            header={(
+                                <>
+                                    <div className="w-full">{item.name}</div>
+                                    <Separator className="border-1 w-full" />
+                                </>
+                            )}
+                            footer={(
+                                <div className="w-full flex justify-end gap-3">
+                                    <D_Button
+                                        iconSize={4}
+                                        className='p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-lg'
+                                        onClick={() => {
+                                            updateSelectedCategoryId(item.id);
+                                            updateCategoryDialogOpen(true);
+                                        }}
+                                        tooltip="Edit"
+                                        icon="Edit" />
+                                    <D_Button
+                                        iconSize={4}
+                                        className='p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-lg'
+                                        onClick={() => {
+                                            alert({
+                                                onConfirm: () => deleteCategoryMutation.mutate(item.id),
+                                            });
+                                        }}
+                                        tooltip="Delete"
+                                        icon="Trash" />
+                                </div>
+                            )}
+                        />
                     ))}
                 </>
             )}

@@ -4,24 +4,61 @@ import { RouteGroupType } from './RouteGroupList';
 import { Separator } from '@radix-ui/react-separator';
 import { RouteGroupList } from './RouteGroupList';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import DevButton from '@/components/ui/DevButton';
+import D_Button from '@/components/D_Components/D_Button';
+import D_Sidebar from '@/components/D_Components/D_Sidebar';
+import { usePathname } from 'next/navigation';
+import { Tabs as ShadTabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Link from 'next/link';
+import { Apple, Boxes, Ruler } from 'lucide-react';
 
-// Define types for the Navigation component and its sub-components
 interface NavigationProps {
     children?: React.ReactNode;
 }
 
 interface NavigationSubComponents {
     Sidebar: React.FC<SidebarProps>;
+    Tabs: React.FC<{}>;
 }
 
 interface SidebarProps {
     open: boolean;
     setOpen: (open: boolean) => void;
-    groups: RouteGroupType[];
 }
 
-// Main Navigation component
+
+export const ROUTE_GROUPS: RouteGroupType[] = [
+    {
+        group: "Foods Management",
+        items: [
+            {
+                href: "/admin/foods-management/foods",
+                label: "Foods",
+                icon: "Apple",
+            },
+            {
+                href: "/admin/foods-management/categories",
+                label: "Categories",
+                icon: "Boxes",
+            },
+            {
+                href: "/admin/foods-management/serving-units",
+                label: "Serving Units",
+                icon: "Ruler",
+            },
+        ],
+    },
+    {
+        group: "Meals Management",
+        items: [
+            {
+                href: "/client",
+                label: "Meals",
+                icon: "Utensils",
+            },
+        ],
+    },
+];
+
 const Navigation: React.FC<NavigationProps> & NavigationSubComponents = ({ children }) => {
     return (
         <nav className="navigation">
@@ -30,60 +67,80 @@ const Navigation: React.FC<NavigationProps> & NavigationSubComponents = ({ child
     );
 };
 
-// Sidebar component
-const Sidebar: React.FC<SidebarProps> = ({ open, setOpen, groups }) => {
+const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
 
     const handleClose = () => {
         setOpen(false);
     }
     return (
         <>
-            {/* Overlay for clicking empty space to close */}
-            {open && (
-                <div
-                    className="fixed inset-0 backdrop-blur-sm z-10"
-                    onClick={() => setOpen(false)}
-                />
-            )}
-            {/* Sidebar */}
-            <div
-                className={`
-            backdrop-blur-sm fixed top-0 left-0 h-screen 
-            border transition-transform duration-300
-            w-64 z-20
-            ${open ? 'translate-x-0' : '-translate-x-full'}
-          `}
-            >
-                <Accordion asChild type="single" defaultValue="sidebar">
-                    <AccordionItem value="sidebar" className="border-none">
-                        <AccordionTrigger className="hidden" />
-                        <AccordionContent forceMount className="h-full">
-                            <div className="h-screen">
-                                <div className="flex items-center justify-center w-64 mt-12">
-                                    <h1 className="font-semibold text-xl mr-2">Navigation</h1>
-                                    <DevButton
-                                        type="icon"
-                                        subtype="chevronLeft"
-                                        onClick={handleClose}
-                                        className='p-2 border-2 rounded-lg hover:opacity-85'
-                                    />
-                                </div>
-                                <Separator className="my-8" />
-                                <div
-                                    className="flex flex-col items-center justify-center w-full">
-                                    <RouteGroupList groups={groups} />
-                                </div>
-                            </div>
-                        </AccordionContent>
-                    </AccordionItem>
-                </Accordion>
-            </div>
+            <D_Sidebar
+                className=' backdrop-blur-lg fixed top-0 left-0 h-screen 
+            border w-86 z-20'
+                open={open}
+                setOpen={setOpen}>
+                <div className="h-screen">
+                    <div className="flex w-full items-center justify-center mt-12">
+                        <h1 className="font-semibold text-xl mr-2">Navigation</h1>
+                        <D_Button
+                            icon='ChevronLeft'
+                            onClick={handleClose}
+                            iconSize={5}
+                            className={`p-3 hover:bg-foreground/10 dark:hover:bg-foreground/10 rounded-lg`}
+                        />
+                    </div>
+                    <Separator className="my-8" />
+                    <div
+                        className="flex flex-col items-center justify-center w-full">
+                        <RouteGroupList groups={ROUTE_GROUPS} />
+                    </div>
+                </div>
+            </D_Sidebar>
         </>
     );
 };
 
+const Tabs: React.FC<{}> = () => {
+    const pathname = usePathname();
+
+    const getDefaultTab = () => {
+        if (pathname.includes("/admin/foods-management/categories"))
+            return "categories";
+        if (pathname.includes("/admin/foods-management/serving-units"))
+            return "serving-units";
+        return "foods";
+    };
+
+    return (
+        <div className='hidden md:inline'>
+            <ShadTabs value={getDefaultTab()}>
+                <TabsList>
+                    <TabsTrigger value="foods" asChild>
+                        <Link href="/admin/foods-management/foods">
+                            <Apple />
+                            Foods
+                        </Link>
+                    </TabsTrigger>
+                    <TabsTrigger value="categories" asChild>
+                        <Link href="/admin/foods-management/categories">
+                            <Boxes />
+                            Categories
+                        </Link>
+                    </TabsTrigger>
+                    <TabsTrigger value="serving-units" asChild>
+                        <Link href="/admin/foods-management/serving-units">
+                            <Ruler />
+                            Serving Units
+                        </Link>
+                    </TabsTrigger>
+                </TabsList>
+            </ShadTabs>
+        </div>
+    )
+}
 
 // Attach sub-components to Navigation
 Navigation.Sidebar = Sidebar;
+Navigation.Tabs = Tabs;
 
 export default Navigation;

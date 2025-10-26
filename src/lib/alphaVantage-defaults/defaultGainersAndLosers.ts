@@ -7,26 +7,13 @@ Method: GET
 
 Query Parameters: None
 
-Example URL: {{ericInvestUrl}}/api/alpha-vantage/top-gainers-losers
-
 */
+import { AV_BadResponse, TopGainersAndLosers } from "@/app/(dashboard)/client/market/_AlphaVantage/_types/responses"
 
-type GainersLosers = {
-    ticker: string,
-    price: number | string,
-    change_amount: number | string,
-    change_percentage: number | string,
-    volume: number | string
-}
+export type GainersLosersResponse = AV_BadResponse & TopGainersAndLosers
 
-export interface TopGainersAndLosers {
-    metadata: string,
-    last_updated: string,
-    top_gainers: GainersLosers[],
-    top_losers: GainersLosers[],
-}
-
-export const defaultGainersAndLosers: TopGainersAndLosers = {
+export const defaultGainersAndLosers: GainersLosersResponse = {
+    "Information": "Default Gainers and Losers",
     "metadata": "Top gainers, losers, and most actively traded US tickers - DATA DELAYED BY 15 MINUTES",
     "last_updated": "2025-04-04 16:15:58 US/Eastern",
     "top_gainers": [

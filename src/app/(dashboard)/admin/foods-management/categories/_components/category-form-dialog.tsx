@@ -18,6 +18,8 @@ import { useCategoriesStore } from "../_libs/use-category-store";
 import { useCreateCategory, useUpdateCategory } from "../_services/use-category-mutations";
 import { CategorySchema, categoryDefaultValues, categorySchema } from "../_types/categorySchema";
 import { useCategory } from "../_services/use-category-queries";
+import { DrawerDialog } from "@/app/(dashboard)/_components/DrawerDialog";
+import D_Button from "@/components/D_Components/D_Button";
 
 type CategoryFormDialogProps = {
     smallTrigger?: boolean;
@@ -72,25 +74,20 @@ const CategoryFormDialog = ({ smallTrigger }: CategoryFormDialogProps) => {
     };
 
     return (
-        <Dialog open={categoryDialogOpen} onOpenChange={handleDialogOpenChange}>
-            <DialogTrigger asChild>
-                {smallTrigger ? (
-                    <Button size="icon" variant="ghost" type="button">
-                        <Plus />
-                    </Button>
-                ) : (
-                    <Button>
-                        <Plus className="mr-2" />
-                        New Category
-                    </Button>
-                )}
-            </DialogTrigger>
-            <DialogContent>
-                <DialogHeader>
-                    <DialogTitle className="text-2xl">
-                        {selectedCategoryId ? "Edit Category" : "Create a New Category"}
-                    </DialogTitle>
-                </DialogHeader>
+        <DrawerDialog
+            openState={{
+                open: categoryDialogOpen,
+                setOpen: handleDialogOpenChange,
+            }}
+            title={selectedCategoryId ? "Edit Category" : "Create a New Category"}
+            trigger={
+                <D_Button
+                    className="flex justify-center items-center py-2 px-4 mt-1 w-max gap-2 rounded-lg"
+                    icon="Plus"
+                    label="New Category"
+                    onMobile="hideLabel"
+                />}
+            content={(
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <FormProvider {...form}>
                         <div className="grid grid-cols-2 gap-4">
@@ -112,8 +109,8 @@ const CategoryFormDialog = ({ smallTrigger }: CategoryFormDialogProps) => {
                         </Button>
                     </DialogFooter>
                 </form>
-            </DialogContent>
-        </Dialog>
+            )}
+        />
     );
 };
 export { CategoryFormDialog };

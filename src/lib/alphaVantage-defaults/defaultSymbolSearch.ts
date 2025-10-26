@@ -1,3 +1,4 @@
+import { AV_BadResponse, SymbolSearchResponse } from "@/app/(dashboard)/client/market/_AlphaVantage/_types/responses";
 /*
 
 Search Symbols
@@ -11,28 +12,12 @@ keywords (required): The search keywords (e.g., microsoft).
 
 datatype (optional): The response format (e.g., json, csv).
 
-Example URL: {{ericInvestUrl}}/api/alpha-vantage/search?keywords=microsoft&datatype=json
-
 */
 
-export interface SymbolSearchMatch {
-    "1. symbol": string;
-    "2. name": string;
-    "3. type": string;
-    "4. region": string;
-    "5. marketOpen": string;     // e.g., "08:00"
-    "6. marketClose": string;    // e.g., "20:00"
-    "7. timezone": string;       // e.g., "UTC+02"
-    "8. currency": string;       // e.g., "EUR"
-    "9. matchScore": string;     // Represented as string e.g., "0.6429"
-  }
-  
-  export interface SymbolSearchResponse {
-    bestMatches: SymbolSearchMatch[];
-  }
-  
+export type SearchResponse = AV_BadResponse & SymbolSearchResponse
 
-export const defaultSymbolSearch: SymbolSearchResponse = {
+export const defaultSymbolSearch: SearchResponse = {
+    "Information": `Default Symbol Search queried with keyword 'microsoft'. `,
     "bestMatches": [
         {
             "1. symbol": "MSF0.FRK",

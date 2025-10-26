@@ -5,6 +5,7 @@ import {
   signInSchema,
   SignInSchema,
 } from "@/app/(auth)/sign-in/_types/signInSchema";
+import D_Background from "@/components/D_Components/D_Background";
 import { Button } from "@/components/ui/button";
 import { ControlledInput } from "@/components/ui/controlled/controlled-input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,42 +25,44 @@ const SignInForm = () => {
   };
 
   return (
-    <FormProvider {...form}>
-      <form
-        className="w-full max-w-96 space-y-5 rounded-md border px-10 py-12"
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <div className="text-center">
-          <h2 className="mb-1 text-2xl font-semibold">Welcome Back</h2>
-          <p className="text-muted-foreground text-sm">
-            Sign in to your account
-          </p>
-        </div>
+    <D_Background invert>
+      <FormProvider {...form}>
+        <form
+          className="w-full max-w-96 space-y-5 rounded-md border px-10 py-12 backdrop-blur-sm"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <div className="text-center">
+            <h2 className="mb-1 text-2xl dark:text-white text-black font-semibold">Welcome Back</h2>
+            <p className="text-muted-foreground text-sm">
+              Sign in to your account
+            </p>
+          </div>
 
-        <div className="space-y-3">
-          <ControlledInput<SignInSchema> name="email" label="Email" />
-          <ControlledInput<SignInSchema>
-            name="password"
-            label="Password"
-            type="password"
-          />
-        </div>
+          <div className="space-y-3">
+            <ControlledInput<SignInSchema> name="email" label="Email" />
+            <ControlledInput<SignInSchema>
+              name="password"
+              label="Password"
+              type="password"
+            />
+          </div>
 
-        <Button className="w-full" isLoading={signInMutation.isPending}>
-          Sign In
-        </Button>
+          <Button className="w-full" isLoading={signInMutation.isPending}>
+            Sign In
+          </Button>
 
-        <div className="text-center text-sm">
-          Don&apos;t have an account?{" "}
-          <Link
-            href="/sign-up"
-            className="text-primary font-medium hover:underline"
-          >
-            Sign up
-          </Link>
-        </div>
-      </form>
-    </FormProvider>
+          <div className="text-center text-sm">
+            Don&apos;t have an account?{" "}
+            <Link
+              href="/sign-up"
+              className="text-primary font-medium hover:underline"
+            >
+              Sign up
+            </Link>
+          </div>
+        </form>
+      </FormProvider>
+    </D_Background>
   );
 };
 

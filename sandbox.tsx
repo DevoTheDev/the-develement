@@ -23,3 +23,4 @@ const newbie: Product = {
     cpu: "Bleeper",
     gpu: "Bleepo"
 }
+

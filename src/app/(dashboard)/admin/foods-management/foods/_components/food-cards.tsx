@@ -3,12 +3,12 @@ import { useFoodsStore } from "../_libs/use-food-store";
 import { useDeleteFood } from "@/app/(dashboard)/admin/foods-management/foods/_services/use-food-mutations";
 import { useFoods } from "@/app/(dashboard)/admin/foods-management/foods/_services/use-food-queries";
 import { NoItemsFound } from "@/app/(dashboard)/_components/no-items-found";
-import { Button } from "@/components/ui/button";
 import { Pagination } from "@/components/ui/pagination";
 import { Separator } from "@/components/ui/separator";
 import { alert } from "@/lib/use-global-store";
-import { Edit, Trash } from "lucide-react";
 import { FoodCardsSkeleton } from "./food-cards-skeleton";
+import D_Card from "@/components/D_Components/D_Card";
+import D_Button from "@/components/D_Components/D_Button";
 
 const FoodCards = () => {
     const {
@@ -36,68 +36,69 @@ const FoodCards = () => {
                 ) : (
                     <>
                         {foodsQuery.data?.data.map((item) => (
-                            <div
-                                className="flex flex-col gap-3 rounded-lg border p-6"
+                            <D_Card
+                                className="p-4 border-1 rounded-lg gap-2"
                                 key={item.id}
-                            >
-                                <div className="flex justify-between">
-                                    <p className="truncate">{item.name}</p>
-                                    <div className="flex gap-1">
-                                        <Button
-                                            className="size-6"
-                                            variant="ghost"
-                                            size="icon"
+                                header={(
+                                    <>
+                                        <div className="w-full" >{item.name}</div>
+                                        <Separator />
+                                    </>
+                                )}
+                                body={(
+                                    <div className="grid grid-cols-2 gap-5 w-full">
+                                        <div>
+                                            <p className="text-foreground/60 text-sm font-normal">
+                                                Calories
+                                            </p>
+                                            <p className="text-sm font-medium">{item.calories} kcal</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-foreground/60 text-sm font-normal">
+                                                Carbohydrates
+                                            </p>
+                                            <p className="text-sm font-medium">
+                                                {item.carbohydrates} g
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p className="text-foreground/60 text-sm font-normal">
+                                                Protein
+                                            </p>
+                                            <p className="text-sm font-medium">{item.protein} g</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-foreground/60 text-sm font-normal">
+                                                Fat
+                                            </p>
+                                            <p className="text-sm font-medium">{item.fat} g</p>
+                                        </div>
+                                    </div>
+                                )}
+                                footer={(
+                                    <div className="w-full flex justify-end gap-3">
+                                        <D_Button
+                                            iconSize={4}
+                                            className='p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-lg'
                                             onClick={() => {
                                                 updateSelectedFoodId(item.id);
                                                 updateFoodDialogOpen(true);
                                             }}
-                                        >
-                                            <Edit />
-                                        </Button>
-                                        <Button
-                                            className="size-6"
-                                            variant="ghost"
-                                            size="icon"
+                                            tooltip="Edit"
+                                            icon="Edit" />
+                                        <D_Button
+                                            iconSize={4}
+                                            className='p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-lg'
                                             onClick={() => {
                                                 alert({
                                                     onConfirm: () => deleteFoodMutation.mutate(item.id),
                                                 });
                                             }}
-                                        >
-                                            <Trash />
-                                        </Button>
+                                            tooltip="Delete"
+                                            icon="Trash" />
                                     </div>
-                                </div>
-                                <Separator />
-                                <div className="grid grid-cols-2 gap-5">
-                                    <div>
-                                        <p className="text-foreground/60 text-sm font-normal">
-                                            Calories
-                                        </p>
-                                        <p className="text-sm font-medium">{item.calories} kcal</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-foreground/60 text-sm font-normal">
-                                            Carbohydrates
-                                        </p>
-                                        <p className="text-sm font-medium">
-                                            {item.carbohydrates} g
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <p className="text-foreground/60 text-sm font-normal">
-                                            Protein
-                                        </p>
-                                        <p className="text-sm font-medium">{item.protein} g</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-foreground/60 text-sm font-normal">
-                                            Fat
-                                        </p>
-                                        <p className="text-sm font-medium">{item.fat} g</p>
-                                    </div>
-                                </div>
-                            </div>
+                                )}
+                            />
                         ))}
                     </>
                 )}

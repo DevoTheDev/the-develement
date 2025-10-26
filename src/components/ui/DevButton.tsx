@@ -33,7 +33,6 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from "@/components/ui/tooltip"
-import useMediaQuery from "@/app/(dashboard)/_components/_hooks/useMediaQuery"
 
 type BaseProps = React.ComponentProps<"div"> & {
     onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
@@ -97,9 +96,6 @@ export default function DevButton(props: DevButtonProps) {
         onClick && onClick(e)
     }
 
-    const isDesktop = useMediaQuery("(min-width: 768px)")
-
-
     // ICON MODE
     if (type === "icon" && subtype) {
         const Icon = iconMap[subtype]
@@ -109,12 +105,11 @@ export default function DevButton(props: DevButtonProps) {
                 {...rest}
                 onClick={handleClick}
                 className={cn(className,
-                    `hover:bg-background/70 transition-transform hover:scale-80 duration-250
-                    cursor-pointer items-center`
+                    `cursor-pointer items-center flex gap-4`
                 )}
             >
                 <Icon className={`w-${iconSize} h-${iconSize} opacity-80`} />
-                {isDesktop && label}
+                {label}
             </div>
         )
         if (!tooltip) {

@@ -1,47 +1,30 @@
 "use client";
 import React, { ReactNode } from 'react';
-import DevButton from '@/components/ui/DevButton';
-import { iconMap } from '@/components/ui/DevButton';
+import D_Button, { D_ButtonProps } from '@/components/D_Components/D_Button';
+import { Separator } from '@radix-ui/react-separator';
 
 type Props = {
     children: ReactNode;
-    button1?: {
-        icon?: keyof typeof iconMap;
-        iconSize?: number;
-        onClick: (props: any) => any;
-        tooltip?: string;
-    };
-    button2?: {
-        icon?: keyof typeof iconMap;
-        iconSize?: number;
-        onClick: (props: any) => any;
-        tooltip?: string;
-    };
+    title: string;
+    button1?: D_ButtonProps;
+    button2?: D_ButtonProps;
     className?: string;
 };
 
 const Card = (props: Props) => {
-    const { children, button1, button2, className } = props;
+    const { children, button1, button2, className, title } = props;
 
     return (
         <div className={className}>
+            <div>{title}</div>
+            <Separator className='border-1' />
             {children}
             <div className='flex w-full justify-end gap-6' >
-                <DevButton
-                    type="icon"
-                    subtype={button1?.icon}
-                    onClick={button1?.onClick}
-                    className='p-2 bg-background rounded-lg border-none  flex justify-center items-center shadow-sm'
-                    tooltip={button1?.tooltip}
-                    iconSize={button1?.iconSize || 4}
+                <D_Button
+                    {...button1}
                 />
-                <DevButton
-                    type="icon"
-                    subtype={button2?.icon}
-                    onClick={button2?.onClick}
-                    className='p-2 bg-background rounded-lg border-none flex justify-center items-center shadow-sm'
-                    tooltip={button2?.tooltip}
-                    iconSize={button2?.iconSize || 4}
+                <D_Button
+                    {...button2}
                 />
             </div>
         </div>

@@ -1,16 +1,6 @@
 "use client";
 import { useSignOut } from "@/app/(auth)/sign-in/_services/use-mutations";
-import { ThemeToggle } from "./theme-toggle";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 import { customErrorMap } from "@/lib/customErrorMap";
 import * as Collapsible from "@radix-ui/react-collapsible";
@@ -30,16 +20,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode, useState } from "react";
 import { z } from "zod";
+import { D_ButtonProps } from "@/components/D_Components/D_Button";
+import UserQuickAccess from "./UserQuickAccess";
 
 z.setErrorMap(customErrorMap);
 
 type RouteGroup = {
     group: string;
-    items: {
-        href: string;
-        label: string;
-        icon: ReactNode;
-    }[];
+    items: D_ButtonProps[];
 };
 
 export const ROUTE_GROUPS: RouteGroup[] = [
@@ -49,17 +37,17 @@ export const ROUTE_GROUPS: RouteGroup[] = [
             {
                 href: "/admin/foods-management/foods",
                 label: "Foods",
-                icon: <Apple className="mr-2 size-3" />,
+                icon: "Apple",
             },
             {
                 href: "/admin/foods-management/categories",
                 label: "Categories",
-                icon: <Boxes className="mr-2 size-3" />,
+                icon: "Boxes",
             },
             {
                 href: "/admin/foods-management/serving-units",
                 label: "Serving Units",
-                icon: <Ruler className="mr-2 size-3" />,
+                icon: "Ruler",
             },
         ],
     },
@@ -69,7 +57,7 @@ export const ROUTE_GROUPS: RouteGroup[] = [
             {
                 href: "/client",
                 label: "Meals",
-                icon: <Utensils className="mr-2 size-3" />,
+                icon: "Utensils",
             },
         ],
     },
@@ -89,10 +77,6 @@ const DashboardLayout = ({ children, session }: DashboardLayoutProps) => {
         }
     });
 
-    const handleLogout = () => {
-        signOutMutation.mutate();
-    };
-
     return (
         <div className="flex">
             <div className="bg-background fixed z-10 flex h-13 w-screen items-center justify-between border px-2">
@@ -103,43 +87,7 @@ const DashboardLayout = ({ children, session }: DashboardLayoutProps) => {
                         </Button>
                     </Collapsible.Trigger>
                 </Collapsible.Root>
-                <div className="flex">
-                    <ThemeToggle />
-                    {session && (
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button
-                                    variant="ghost"
-                                    className="flex h-9 items-center gap-2 px-2"
-                                >
-                                    <Avatar className="size-8">
-                                        <AvatarFallback>{session.user?.name?.[0]}</AvatarFallback>
-                                    </Avatar>
-                                    <span className="hidden md:inline">{session.user?.name}</span>
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end" className="w-56">
-                                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                <div className="flex items-center gap-3 px-2 py-1.5">
-                                    <Avatar className="size-10">
-                                        <AvatarFallback>{session.user?.name?.[0]}</AvatarFallback>
-                                    </Avatar>
-                                    <div>
-                                        <p className="text-sm font-medium">{session.user?.name}</p>
-                                        <p className="text-muted-foreground text-xs">
-                                            {session.user?.email}
-                                        </p>
-                                    </div>
-                                </div>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem onClick={handleLogout} variant="destructive">
-                                    <LogOut className="size-4" /> Logout
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    )}
-                </div>
+                <UserQuickAccess session={session} />
             </div>
 
             <Collapsible.Root
