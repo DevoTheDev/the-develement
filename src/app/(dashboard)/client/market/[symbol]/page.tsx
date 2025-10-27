@@ -2,9 +2,7 @@
 import React from 'react'
 import { useParams } from 'next/navigation'
 
-type Props = {}
-
-const page = (props: Props) => {
+const page = () => {
     const { symbol } = useParams();
     return (
         <div>{symbol}</div>

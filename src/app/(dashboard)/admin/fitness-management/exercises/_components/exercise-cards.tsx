@@ -26,6 +26,7 @@ const ExerciseCards = () => {
                 <>
                     {exerciseQuery.data?.map((item) => (
                         <Card
+                            title={item.name}
                             className="bg-background border-2 dark:shadow-white/30 shadow-md border-white/25 rounded-lg p-2"
                             key={item.id}
                             button1={{

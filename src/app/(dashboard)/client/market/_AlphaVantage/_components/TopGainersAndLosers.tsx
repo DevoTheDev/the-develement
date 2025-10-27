@@ -32,7 +32,7 @@ const TopGainersAndLosers = ({
         return (
             <D_Collapsible
                 open={open}
-                head={(
+                trigger={(
                     <div className='flex gap-2 cursor-pointer' onClick={handleOpen}>
                         <div className="text-xl">{title}</div>
                         <D_Button
@@ -41,7 +41,7 @@ const TopGainersAndLosers = ({
                         />
                     </div>
                 )}
-                body={(
+                content={(
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm text-left text-neutral-500">
                             <thead className="text-xs text-neutral-500 uppercase bg-background">

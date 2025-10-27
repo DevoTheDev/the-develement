@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import { useGetQuote } from '../_services/useQueries'
-import * as AV from "../_types/responses"
 import D_Collapsible from '@/components/D_Components/D_Collapsible';
 import D_Button from '@/components/D_Components/D_Button';
 import * as AV_Params from "../_types/params";
@@ -28,7 +27,7 @@ export default function Quote({ symbol }: QuoteProps) {
             <D_Collapsible
                 className='w-1/4 cursor-pointer'
                 open={open}
-                head={(
+                trigger={(
                     <div
                         className={`
                     flex justify-between items-center hover:bg-black/10 dark:hover:bg-white/5
@@ -49,7 +48,7 @@ export default function Quote({ symbol }: QuoteProps) {
                         </div>
                     </div>
                 )}
-                body={(
+                content={(
                     <>
                         <div
                             className={`

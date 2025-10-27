@@ -30,13 +30,13 @@ const D_Accordion = ({
                     <D_Collapsible
                         key={i}
                         open={isOpen}
-                        head={(
+                        trigger={(
                             <div
                                 onClick={() => setOpenSection(sect.head.title)}>
                                 {sect.head.render}
                             </div>
                         )}
-                        body={sect.body}
+                        content={sect.body}
                     />
                 )
             })}
