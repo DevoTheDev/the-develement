@@ -6,29 +6,27 @@ import { ClassName } from "./D_types";
 
 export type D_CollapsibleProps = Partial<ClassName> & {
     open: boolean;
-    head: ReactNode;
-    body: ReactNode;
+    trigger: ReactNode;
+    content: ReactNode;
 };
 
-const D_Collapsible = ({ head, body, open, className }: D_CollapsibleProps) => {
+const D_Collapsible = ({ trigger, content, open, className }: D_CollapsibleProps) => {
     return (
         <Collapsible.Root open={open} className={className}>
             <Collapsible.Trigger asChild className="w-full">
-                {head}
+                {trigger}
             </Collapsible.Trigger>
-
             <Collapsible.Content asChild>
                 <AnimatePresence initial={false}>
                     {open && (
                         <motion.div
-                            key="body"
+                            key="content"
                             initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
+                            animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
                             exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.35, ease: "easeInOut" }}
-                            className="overflow-hidden"
-                        >
-                            <div className="py-2">{body}</div>
+                            transition={{ duration: 0.6, ease: "easeInOut" }}
+                            className="overflow-hidden">
+                            <div className="py-2">{content}</div>
                         </motion.div>
                     )}
                 </AnimatePresence>

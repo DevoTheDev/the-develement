@@ -5,35 +5,40 @@ import D_Transition from "@/components/D_Components/D_Transition"
 import HeroCardMobile from "@/components/me/HeroCard/HeroCardMobile"
 import MyResume from "@/components/me/MyResume"
 import TechStack from "@/components/me/TechUsed/TechStack"
-import { SignInForm } from "@/app/(auth)/sign-in/_components/sign-in-form";
 import MyTitlePage from "@/components/me/MyTitlePage"
-
-
+import D_Button from "@/components/D_Components/D_Button"
+import { redirect } from "next/navigation"
 
 export default function Home() {
 
   return (
-    <D_Background backgroundClassName="bg-gradient-to-b from-white via-white/90 to-black" >
+    <D_Background invert >
       <D_Transition>
         <D_Transition.Section id="intro">
-          <div className="bg-gradient-to-b from-white via-transparent to-transparent items-center flex justify-center h-screen w-full" >
+          <div className="bg-gradient-to-b from-black via-white/0 to-white/10 items-center flex justify-center h-screen w-full" >
             <MyTitlePage />
           </div>
         </D_Transition.Section>
         <D_Transition.Section id="experience">
-          <div className="bg-gradient-to-b items-center flex justify-center from-transparent via-black/5 to-black/10 h-screen w-full" >
+          <div
+            className={`
+          items-center flex justify-center h-screen w-full
+          bg-gradient-to-b from-white/10 via-white/30 to-white/70
+          `}>
             <HeroCardMobile />
           </div>
         </D_Transition.Section>
         <D_Transition.Section id="experience">
-          <div className="bg-gradient-to-b from-black/10 via-transparent to-black hidden md:flex items-center h-screen gap-8 px-[10%] py-[2%]" >
-            <div className="w-1/2 " >
-              <MyResume />
+          <D_Background backgroundClassName="bg-gradient-to-b from-white/55 via-white/80 to-white">
+            <div className=" hidden md:flex items-center h-screen gap-8 px-[10%] py-[2%]" >
+              <div className="w-1/2 " >
+                <MyResume />
+              </div>
+              <div className="w-full" >
+                <TechStack />
+              </div>
             </div>
-            <div className="w-full" >
-              <TechStack />
-            </div>
-          </div>
+          </D_Background>
           <div className="flex md:hidden bg-gradient-to-b from-black/10 via-transparent to-black" >
             <D_Carousel
               items={[
@@ -47,9 +52,21 @@ export default function Home() {
           </div>
         </D_Transition.Section>
         <D_Transition.Section id="sign-in">
-          <div className="w-full h-screen flex justify-center items-center text-center">
-            <SignInForm />
-          </div>
+          <D_Background  >
+            <div
+              onClick={() => redirect("/sign-in")}
+              className="flex md:self-start self-center items-center md:ml-[20%] gap-6 transform-content duration-300 hover:scale-130" >
+              <D_Button
+                label="See the Site"
+                className={`text-black/50 text-2xl font-bold`}
+                disableDefault
+              />
+              <D_Button
+                icon="ChevronRight"
+                className="text-3xl opacity-50 pt-1"
+              />
+            </div>
+          </D_Background>
         </D_Transition.Section>
       </D_Transition>
     </D_Background>

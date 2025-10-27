@@ -67,9 +67,6 @@ export const RouteGroupList = ({ groups }: RouteGroupListProps) => {
         <div className="flex flex-col gap-8 w-full max-w-xs ">
             {groups.map((group) => {
                 const isOpen = group.group === openGroup;
-                const idAdmin = JSON.stringify(group.items).includes('admin');
-                const idClient = JSON.stringify(group.items).includes('client');
-
 
                 return (
                     <div

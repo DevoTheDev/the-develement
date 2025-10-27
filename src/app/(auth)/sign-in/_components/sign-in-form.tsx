@@ -5,15 +5,19 @@ import {
   signInSchema,
   SignInSchema,
 } from "@/app/(auth)/sign-in/_types/signInSchema";
-import D_Background from "@/components/D_Components/D_Background";
 import { Button } from "@/components/ui/button";
 import { ControlledInput } from "@/components/ui/controlled/controlled-input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { redirect } from "next/navigation";
 
-const SignInForm = () => {
+type SignFormProps = {
+  whiteSnow?: boolean
+  blackSnow?: boolean
+}
+
+const SignInForm = ({
+}: SignFormProps) => {
   const form = useForm<SignInSchema>({
     defaultValues: signInDefaultValues,
     resolver: zodResolver(signInSchema),
@@ -23,26 +27,30 @@ const SignInForm = () => {
 
   const onSubmit: SubmitHandler<SignInSchema> = (data) => {
     signInMutation.mutate(data);
-    redirect("/admin");
   };
 
-  return (
-    <D_Background invert backgroundClassName="bg-gradient-to-b from-black via-black to-white">
+  const formRender = () => {
+    return (
       <FormProvider {...form}>
         <form
-          className="w-full max-w-96 space-y-5 rounded-md border px-10 py-12 backdrop-blur-xs "
+          className="w-full max-w-96 space-y-5 rounded-md border px-10 py-12 backdrop-blur-xs"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <div className="text-center">
-            <h2 className="mb-1 text-2xl dark:text-white text-black font-semibold">Welcome Back</h2>
-            <p className="text-white/50 text-sm">
+            <h2 className="mb-1 text-2xl font-semibold">Welcome Back</h2>
+            <p className="text-muted-foreground text-sm">
               Sign in to your account
             </p>
           </div>
 
-          <div className="space-y-3 ">
-            <ControlledInput<SignInSchema> name="email" label="Email" />
+          <div className="space-y-3">
             <ControlledInput<SignInSchema>
+              className="text-white border-1 font-semibold rounded-md"
+              name="email"
+              label="Email"
+            />
+            <ControlledInput<SignInSchema>
+              className="text-white border-1 font-semibold rounded-md"
               name="password"
               label="Password"
               type="password"
@@ -57,15 +65,18 @@ const SignInForm = () => {
             Don&apos;t have an account?{" "}
             <Link
               href="/sign-up"
-              className="text-primary font-medium hover:underline"
+              className="text-white/50 font-medium hover:underline"
             >
               Sign up
             </Link>
           </div>
         </form>
       </FormProvider>
-    </D_Background>
-  );
+    )
+  }
+
+  return formRender();
+
 };
 
 export { SignInForm };

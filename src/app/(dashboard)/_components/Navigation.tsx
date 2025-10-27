@@ -3,7 +3,6 @@ import React from 'react';
 import { RouteGroupType } from './RouteGroupList';
 import { Separator } from '@radix-ui/react-separator';
 import { RouteGroupList } from './RouteGroupList';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import D_Button from '@/components/D_Components/D_Button';
 import D_Sidebar from '@/components/D_Components/D_Sidebar';
 import { usePathname } from 'next/navigation';
@@ -28,7 +27,7 @@ interface SidebarProps {
 
 export const ROUTE_GROUPS: RouteGroupType[] = [
     {
-        group: "Foods Management",
+        group: "Nutrition Management",
         items: [
             {
                 href: "/admin/foods-management/foods",
@@ -45,18 +44,43 @@ export const ROUTE_GROUPS: RouteGroupType[] = [
                 label: "Serving Units",
                 icon: "Ruler",
             },
-        ],
-    },
-    {
-        group: "Meals Management",
-        items: [
             {
-                href: "/client",
+                href: "/client/foods-management/meals",
                 label: "Meals",
                 icon: "Utensils",
             },
         ],
     },
+    {
+        group: "Fitness Management",
+        items: [
+            {
+                href: "/admin/fitness-management/exercises",
+                label: "Exercises",
+                icon: "BicepsFlexed",
+            },
+            {
+                href: "/admin/fitness-management/workouts",
+                label: "Workouts",
+                icon: "Dumbbell",
+            },
+        ],
+    },
+    {
+        group: "Financial Management",
+        items: [
+            {
+                href: "/client/financial-management/market",
+                label: "Market",
+                icon: "LineChart",
+            },
+            {
+                href: "/client/financial-management/portfolio",
+                label: "Portfolio",
+                icon: "Briefcase",
+            },
+        ]
+    }
 ];
 
 const Navigation: React.FC<NavigationProps> & NavigationSubComponents = ({ children }) => {

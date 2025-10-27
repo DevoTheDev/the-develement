@@ -1,47 +1,30 @@
+// src/auth/next-auth.ts
 import db from "@/lib/db";
 import { comparePassword, toNumberSafe, toStringSafe } from "@/lib/utils";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { signInSchema } from "@/app/(auth)/sign-in/_types/signInSchema";
-
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
         Credentials({
-            credentials: {
-                email: {},
-                password: {},
-            },
-            authorize: async (credentials) => {
-                if (!credentials?.email || !credentials?.password) {
-                    throw new Error("Email and password are required");
-                }
+            credentials: { email: {}, password: {} },
 
-                const validatedCredentials = signInSchema.parse(credentials);
+            async authorize(credentials) {
+                // ---- 1. Validate input -------------------------------------------------
+                const { email, password } = signInSchema.parse(credentials);
 
-                const user = await db.user.findUnique({
-                    where: {
-                        email: validatedCredentials.email,
-                    },
-                });
+                // ---- 2. Find user ------------------------------------------------------
+                const user = await db.user.findUnique({ where: { email } });
+                if (!user) throw new Error("Invalid email or password");
 
-                if (!user) {
-                    throw new Error("Invalid email or password");
-                }
+                // ---- 3. Verify password ------------------------------------------------
+                const ok = await comparePassword(password, user.password);
+                if (!ok) throw new Error("Invalid email or password");
 
-                const isPasswordValid = await comparePassword(
-                    validatedCredentials.password,
-                    user.password,
-                );
-
-                if (!isPasswordValid) {
-                    throw new Error("Invalid email or password");
-                }
-
+                // ---- 4. Return minimal user payload ------------------------------------
                 return {
-                    id: toStringSafe(user.id),
+                    id: toStringSafe(user.id),   // string for session
                     email: user.email,
                     name: user.name,
                     role: user.role,
@@ -49,30 +32,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
         }),
     ],
-    pages: {
-        signIn: "/sign-in",
-    },
 
     callbacks: {
+        // ---- Add custom claims to JWT -------------------------------------------
         jwt({ token, user }) {
-            const clonedToken = token;
             if (user) {
-                clonedToken.id = toNumberSafe(user.id);
-                clonedToken.name = user?.name;
-                clonedToken.role = user?.role;
+                token.id = toNumberSafe(user.id);   // keep as number inside JWT
+                token.name = user.name;
+                token.role = user.role;
             }
-            return clonedToken;
+            return token;
         },
+
+        // ---- Expose the same claims in the client session -----------------------
         session({ session, token }) {
-            const clonedSession = session;
-
-            if (clonedSession.user) {
-                clonedSession.user.id = toStringSafe(token.id);
-                clonedSession.user.name = token.name;
-                clonedSession.user.role = token.role;
+            if (session.user) {
+                session.user.id = toStringSafe(token.id);
+                session.user.name = token.name;
+                session.user.role = token.role;
             }
-
-            return clonedSession;
+            return session;
         },
     },
 });

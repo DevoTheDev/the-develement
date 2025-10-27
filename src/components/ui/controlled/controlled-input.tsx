@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { ComponentProps } from "react";
 import { Controller, FieldValues, Path, useFormContext } from "react-hook-form";
 
-type InputProps<T extends FieldValues> = {
+export type InputProps<T extends FieldValues> = {
     name: Path<T>;
     label?: string;
     containerClassName?: string;
@@ -33,7 +33,7 @@ const ControlledInput = <T extends FieldValues>({
                 name={name}
                 control={control}
                 render={({ field, fieldState: { error } }) => (
-                    <>
+                    <div className={className}>
                         <Input
                             type={type}
                             id={name}
@@ -46,7 +46,7 @@ const ControlledInput = <T extends FieldValues>({
                         {!!error && (
                             <p className="text-destructive text-sm">{error.message}</p>
                         )}
-                    </>
+                    </div>
                 )}
             />
         </div>

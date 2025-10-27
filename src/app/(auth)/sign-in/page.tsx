@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 const Page = async () => {
   const session = await auth();
   if (session?.user?.role === Role.ADMIN)
-    redirect("/admin/foods-management/foods");
+    redirect("/admin");
   if (session?.user?.role === Role.USER) redirect("/client");
 
   return (
