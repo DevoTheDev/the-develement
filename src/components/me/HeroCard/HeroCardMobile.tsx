@@ -20,7 +20,7 @@ const HeroCardMobile = (props: Props) => {
                 </p>
                 <div className='flex justify-center md:justify-start' >
                     <TechDisplay
-                        className='flex w-full justify-center md:justify-start'
+                        className='flex w-full justify-center md:justify-start gap-8'
                         github
                         linkedin
                         gmail

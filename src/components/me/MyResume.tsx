@@ -4,7 +4,7 @@ import D_Button from "../D_Components/D_Button";
 import D_Accordion, { D_AccordionProps } from "../D_Components/D_Accordion";
 
 const D_AccordionContent: D_AccordionProps = {
-  className: 'bg-white/30 rounded-lg p-4 flex md:hidden',
+  className: 'bg-white/30 rounded-lg p-4 flex flex-col w-full md:hidden',
   sections: [
     {
       head: {
@@ -17,7 +17,7 @@ const D_AccordionContent: D_AccordionProps = {
         ),
       },
       body: (
-        <ul className="list-disc list-inside text-xs md:text-md">
+        <ul className="list-disc list-inside bg-black/5 p-4 text-xs md:text-md">
           <li>Unloaded the truck and stocked the shelves with merchandise.</li>
           <li>Operated heavy machinery to organize the warehouse.</li>
         </ul>
@@ -34,7 +34,7 @@ const D_AccordionContent: D_AccordionProps = {
         ),
       },
       body: (
-        <ul className="list-disc list-inside text-xs md:text-md">
+        <ul className="list-disc list-inside bg-black/5 p-4 text-xs md:text-md">
           <li>Developed low-level, in-house organization software using React and Express.</li>
           <li>Managed hardware orders and client-specific IT solutions.</li>
           <li>Gained deeper experience with procurement workflows and client support.</li>
@@ -52,7 +52,7 @@ const D_AccordionContent: D_AccordionProps = {
         ),
       },
       body: (
-        <ul className="list-disc list-inside text-xs md:text-md">
+        <ul className="list-disc list-inside bg-black/5 p-4 text-xs md:text-md">
           <li>Developed mobile and web apps using React, React Native, Angular.</li>
           <li>Integrated CI/CD with Jenkins and Docker.</li>
           <li>Worked in Agile and Waterfall team settings.</li>
@@ -70,7 +70,7 @@ const D_AccordionContent: D_AccordionProps = {
         ),
       },
       body: (
-        <ul className="list-disc list-inside text-xs md:text-md">
+        <ul className="list-disc list-inside bg-black/5 p-4 text-xs md:text-md">
           <li>Handled peak customer service loads with a strong sense of teamwork.</li>
           <li>Explained menu items, specials, and coordinated with kitchen staff.</li>
         </ul>
@@ -87,7 +87,7 @@ const D_AccordionContent: D_AccordionProps = {
         ),
       },
       body: (
-        <ul className="list-disc list-inside text-xs md:text-md">
+        <ul className="list-disc list-inside bg-black/5 p-4 text-xs md:text-md">
           <li>Provided retail support and developed communication under pressure.</li>
           <li>Worked with store teams to ensure smooth customer experience.</li>
         </ul>
@@ -103,9 +103,9 @@ const D_AccordionContent: D_AccordionProps = {
         ),
       },
       body: (
-        <div className="px-4" >
-          <h3 className="text-sm">Evans High School</h3>
-          <p className="md:text-sm text-xs text-gray-600">High School Diploma, May 2019</p>
+        <div className="p-4 bg-black/5" >
+          <h3 className="text-sm font-semibold">Evans High School</h3>
+          <p className="list-disc list-inside text-xs md:text-md">High School Diploma, May 2019</p>
         </div>
       )
     }

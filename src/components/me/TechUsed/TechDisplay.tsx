@@ -50,6 +50,7 @@ const techMap: TechLink[] = [
   { key: "awsRoute53", label: "Route 53 (AWS)", src: "/logos/aws-route53.svg", docs: "https://aws.amazon.com/route53/", type: "infrastructure" },
   { key: "sqlite", label: "SQLite", src: "/logos/sqlite.svg", docs: "https://sqlite.org/", type: "database" },
   { key: "prisma", label: "Prisma", src: "/logos/prisma.svg", docs: "https://www.prisma.io/", type: "database" },
+  { key: "zod", label: "Zod", src: "/logos/zod.svg", docs: "https://zod.dev/", type: "database" },
   { key: "awsAmplify", label: "Amplify (AWS)", src: "/logos/aws-amplify.svg", docs: "https://aws.amazon.com/amplify/", type: "infrastructure" },
   { key: "linux", label: "Linux (AWS-EC2)", src: "/logos/linux.svg", docs: "https://www.linux.org/", type: "infrastructure" },
   { key: "jenkins", label: "Jenkins", src: "/logos/jenkins.svg", docs: "https://www.jenkins.io/", type: "infrastructure" },
@@ -75,7 +76,7 @@ const TechDisplay: React.FC<TechDisplayProps> = ({ centered = false, label = tru
         className={clsx(
           "relative flex justify-center items-center p-0 md:p-1 lg:p-2 w-max rounded-3xl gap-2",
           "transition-all duration-200 transform",
-          "cursor-pointer hover:bg-black/10 text-black",
+          "cursor-pointer md:hover:bg-black/10 text-black",
           "hover:scale-[1.05]",
           hoverTextColor,
           { "px-8": padded },
@@ -103,7 +104,7 @@ const TechDisplay: React.FC<TechDisplayProps> = ({ centered = false, label = tru
 
   return (
     <div
-      className={className ? className : 'md:flex md:flex-wrap grid grid-cols-5 gap-1 md:gap-4'}
+      className={className ? className : 'md:flex md:flex-wrap grid grid-cols-5 gap-0 md:gap-4'}
       role="list"
       aria-label="Technology stack"
     >

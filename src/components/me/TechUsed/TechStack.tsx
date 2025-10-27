@@ -38,6 +38,7 @@ interface TechSection {
     jenkins?: boolean,
     bootstrap?: boolean,
     sass?: boolean,
+    zod?: boolean,
   };
 }
 
@@ -75,7 +76,8 @@ const techSections: TechSection[] = [
       postgres: true,
       mongodb: true,
       prisma: true,
-      sqlite: true
+      sqlite: true,
+      zod: true,
     },
   },
   {

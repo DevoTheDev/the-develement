@@ -5,7 +5,6 @@ import D_Transition from "@/components/D_Components/D_Transition"
 import HeroCardMobile from "@/components/me/HeroCard/HeroCardMobile"
 import MyResume from "@/components/me/MyResume"
 import TechStack from "@/components/me/TechUsed/TechStack"
-import ColoredText from "@/components/ui/ColoredText"
 import { SignInForm } from "@/app/(auth)/sign-in/_components/sign-in-form";
 import MyTitlePage from "@/components/me/MyTitlePage"
 
@@ -17,7 +16,7 @@ export default function Home() {
     <D_Background backgroundClassName="bg-gradient-to-b from-white via-white/90 to-black" >
       <D_Transition>
         <D_Transition.Section id="intro">
-          <div className="bg-gradient-to-b items-center flex justify-center h-screen w-full" >
+          <div className="bg-gradient-to-b from-white via-transparent to-transparent items-center flex justify-center h-screen w-full" >
             <MyTitlePage />
           </div>
         </D_Transition.Section>
@@ -35,7 +34,7 @@ export default function Home() {
               <TechStack />
             </div>
           </div>
-          <div className="flex md:hidden " >
+          <div className="flex md:hidden bg-gradient-to-b from-black/10 via-transparent to-black" >
             <D_Carousel
               items={[
                 (<MyResume />),
