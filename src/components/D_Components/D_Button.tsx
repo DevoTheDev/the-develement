@@ -22,6 +22,7 @@ export type D_ButtonProps = Partial<ClassName> & {
   onMobile?: 'hideIcon' | 'hideLabel'
   disableDefault?: boolean
   isLoading?: boolean
+  download?: boolean
 }
 
 const D_Button = ({
@@ -35,6 +36,7 @@ const D_Button = ({
   className,
   disableDefault,
   isLoading,
+  download,
 }: D_ButtonProps) => {
 
 
@@ -50,7 +52,7 @@ const D_Button = ({
   return (
     <Tooltip>
       <TooltipTrigger>
-        <Link href={href}>
+        <Link href={href} download={download ? true : false}>
           <div
             className={className ? cn(className, (!disableDefault ? 'transition-transform duration-250 hover:scale-85 hover:opacity-85' : '')) : ''}
             onClick={handleClick}

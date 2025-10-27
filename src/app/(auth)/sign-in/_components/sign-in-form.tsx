@@ -25,20 +25,20 @@ const SignInForm = () => {
   };
 
   return (
-    <D_Background invert>
+    <D_Background invert backgroundClassName="bg-gradient-to-b from-black via-black to-white">
       <FormProvider {...form}>
         <form
-          className="w-full max-w-96 space-y-5 rounded-md border px-10 py-12 backdrop-blur-sm"
+          className="w-full max-w-96 space-y-5 rounded-md border px-10 py-12 backdrop-blur-xs "
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <div className="text-center">
             <h2 className="mb-1 text-2xl dark:text-white text-black font-semibold">Welcome Back</h2>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-white/50 text-sm">
               Sign in to your account
             </p>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 ">
             <ControlledInput<SignInSchema> name="email" label="Email" />
             <ControlledInput<SignInSchema>
               name="password"

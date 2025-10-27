@@ -165,7 +165,7 @@ const D_Background: React.FC<D_BackgroundProps> = ({
         >
             <canvas
                 ref={canvasRef}
-                className="absolute top-0 left-0 w-full h-full z-[1]"
+                className="absolute top-0 left-0 w-full z-[1]"
             />
             <motion.div
                 className={`relative z-[2] w-full h-full flex flex-col items-center justify-center 

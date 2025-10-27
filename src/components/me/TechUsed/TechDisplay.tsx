@@ -56,19 +56,28 @@ const techMap: TechLink[] = [
 
 ] as const;
 
+const hoverColorByType: Record<string, string> = {
+  frontend: "hover:text-black/80",
+  backend: "hover:text-black/50",
+  database: "hover:text-white/90",
+  infrastructure: "hover:text-white",
+};
+
 const TechDisplay: React.FC<TechDisplayProps> = ({ centered = false, label = true, size = 36, padded = false, vertical = false, className, ...techFlags }) => {
   const selected = techMap.filter((tech) => techFlags[tech.key]);
 
   const labeledLogo = (data: TechLink) => {
+    const hoverTextColor = hoverColorByType[data.type] || "";
 
     return (
       <div
         key={data.key}
         className={clsx(
-          "relative flex justify-center items-center p-4 w-max rounded-3xl gap-3",
+          "relative flex justify-center items-center p-0 md:p-1 lg:p-2 w-max rounded-3xl gap-2",
           "transition-all duration-200 transform",
-          "cursor-pointer hover:bg-black/10 text-black hover:text-white",
+          "cursor-pointer hover:bg-black/10 text-black",
           "hover:scale-[1.05]",
+          hoverTextColor,
           { "px-8": padded },
         )}
       >
@@ -87,14 +96,14 @@ const TechDisplay: React.FC<TechDisplayProps> = ({ centered = false, label = tru
             className="object-contain"
           />
         </a>
-        {label && <span className="text-center text-xs md:flex hidden">{data.label}</span>}
+        {label && <span className="text-center text-xs lg:flex md:hidden hidden">{data.label}</span>}
       </div>
     );
   };
 
   return (
     <div
-      className={className ? className : 'md:flex md:flex-wrap grid grid-cols-5 md:gap-4'}
+      className={className ? className : 'md:flex md:flex-wrap grid grid-cols-5 gap-1 md:gap-4'}
       role="list"
       aria-label="Technology stack"
     >

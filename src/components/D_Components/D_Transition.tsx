@@ -38,7 +38,7 @@ const D_Transition: React.FC<{ children: React.ReactNode }> & {
     Section: typeof Section;
 } = ({ children }) => {
     return (
-        <div className="w-full h-screen overflow-y-scroll scroll-smooth snap-y snap-mandatory">
+        <div className="w-full overflow-y-scroll scroll-smooth snap-y snap-mandatory">
             {children}
         </div>
     );
