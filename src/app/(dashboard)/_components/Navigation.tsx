@@ -66,21 +66,6 @@ export const ROUTE_GROUPS: RouteGroupType[] = [
             },
         ],
     },
-    {
-        group: "Financial Management",
-        items: [
-            {
-                href: "/client/financial-management/market",
-                label: "Market",
-                icon: "LineChart",
-            },
-            {
-                href: "/client/financial-management/portfolio",
-                label: "Portfolio",
-                icon: "Briefcase",
-            },
-        ]
-    }
 ];
 
 const Navigation: React.FC<NavigationProps> & NavigationSubComponents = ({ children }) => {
