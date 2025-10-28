@@ -11,6 +11,7 @@ import { DrawerDialog } from "@/app/(dashboard)/_components/DrawerDialog";
 import { DialogFooter } from "@/components/ui/dialog";
 import DevButton from "@/components/ui/DevButton";
 import { Button } from "@/components/ui/button";
+import D_Button from "@/components/D_Components/D_Button";
 
 const ExerciseForm = () => {
     const form = useForm<ExerciseSchema>({
@@ -69,7 +70,13 @@ const ExerciseForm = () => {
                 setOpen: handleDialogOpenChange,
             }}
             title={selectedExerciseId ? "Edit Exercise" : "Create a New Exercise"}
-            trigger={<DevButton type="icon" subtype="plus" label="New Exercise" className="flex gap-4 p-2" />}
+            trigger={(
+                <D_Button
+                    icon="Plus"
+                    label="New Exercise"
+                    className="flex items-center gap-3 p-4 dark:hover:bg-white/10 hover:bg-black/10 rounded-lg"
+                />
+            )}
             content={(
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <FormProvider {...form}>

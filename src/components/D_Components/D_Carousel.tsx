@@ -16,7 +16,7 @@ const D_Carousel = ({
     items,
 }: D_CarouselProps) => {
     return (
-        <Carousel className="w-full mx-24">
+        <Carousel className="w-full flex justify-center mx-24">
             <CarouselContent >
                 {items.map((item, i) => {
                     return (

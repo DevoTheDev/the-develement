@@ -42,7 +42,7 @@ const techMap: TechLink[] = [
   { key: "css", label: "CSS3", src: "/logos/css.svg", docs: "https://developer.mozilla.org/en-US/docs/Web/CSS", type: "frontend" },
   { key: "python", label: "Python", src: "/logos/python2.svg", docs: "https://docs.python.org/3/", type: "backend" },
   { key: "javascript", label: "Javascript", src: "/logos/javascript.svg", docs: "https://developer.mozilla.org/en-US/docs/Web/JavaScript", type: "javascript" },
-  { key: "gmail", label: "Gmail", src: "/logos/gmail.svg", docs: "mailto:devonfennell23@gmail.com", type: "gmail" },
+  { key: "gmail", label: "Gmail", src: "/logos/gmail.svg", docs: "mailto:devonfennelljobs@gmail.com", type: "gmail" },
   { key: "node", label: "NodeJS", src: "/logos/node.svg", docs: "https://nodejs.org/en", type: "backend" },
   { key: "aws", label: "Amazon Web Services", src: "/logos/aws.svg", docs: "https://aws.amazon.com/", type: "infrastructure" },
   { key: "awsEC2", label: "EC2 (AWS)", src: "/logos/aws-ec2.svg", docs: "https://aws.amazon.com/ec2/", type: "infrastructure" },
@@ -52,6 +52,7 @@ const techMap: TechLink[] = [
   { key: "prisma", label: "Prisma", src: "/logos/prisma.svg", docs: "https://www.prisma.io/", type: "database" },
   { key: "zod", label: "Zod", src: "/logos/zod.svg", docs: "https://zod.dev/", type: "database" },
   { key: "awsAmplify", label: "Amplify (AWS)", src: "/logos/aws-amplify.svg", docs: "https://aws.amazon.com/amplify/", type: "infrastructure" },
+  { key: "awsCloudWatch", label: "CloudWatch (AWS)", src: "/logos/aws-cloudwatch.svg", docs: "https://aws.amazon.com/cloudwatch/", type: "infrastructure" },
   { key: "linux", label: "Linux (AWS-EC2)", src: "/logos/linux.svg", docs: "https://www.linux.org/", type: "infrastructure" },
   { key: "jenkins", label: "Jenkins", src: "/logos/jenkins.svg", docs: "https://www.jenkins.io/", type: "infrastructure" },
 

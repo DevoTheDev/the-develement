@@ -91,11 +91,13 @@ model User {
 // }
 
 model Exercise {
-  id          Int     @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
   description String?
   sets        Float?
   reps        Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
 }
 
 enum Role {
