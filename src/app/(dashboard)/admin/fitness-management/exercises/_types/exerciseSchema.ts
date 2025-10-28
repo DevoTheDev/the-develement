@@ -20,7 +20,7 @@ const exerciseSchema = z.intersection(
 type ExerciseSchema = z.infer<typeof exerciseSchema>;
 
 // exerciseSchema.ts
-const exerciseDefaultValues: Extract<ExerciseSchema, { action: "create" }> = {
+const exerciseDefaultValues: ExerciseSchema = {
     action: "create",
     name: "",
     description: "",

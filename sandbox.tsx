@@ -24,8 +24,6 @@ const newbie: Product = {
     gpu: "Bleepo"
 }
 
-
-
 // ssh -i "develement-ssh.pem" ubuntu@ec2-18-118-34-25.us-east-2.compute.amazonaws.com
 
 /* 

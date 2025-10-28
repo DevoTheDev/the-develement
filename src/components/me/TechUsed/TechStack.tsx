@@ -39,6 +39,7 @@ interface TechSection {
     bootstrap?: boolean,
     sass?: boolean,
     zod?: boolean,
+    awsCloudWatch?: boolean,
   };
 }
 
@@ -91,6 +92,7 @@ const techSections: TechSection[] = [
       linux: true,
       awsAmplify: true,
       jenkins: true,
+      awsCloudWatch: true,
     },
   },
 ];
@@ -132,7 +134,7 @@ const TechStack: React.FC<TechStackProps> = ({
         transition-all hover:scale-[1.02] transform
         hover:shadow-md duration-200
         rounded-2xl shadow-sm
-        backdrop-blur-xs bg-white/30
+        backdrop-blur-xs
       `}
       role="region"
       aria-label="Technology stack sections"

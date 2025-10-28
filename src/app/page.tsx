@@ -28,28 +28,31 @@ export default function Home() {
             <HeroCardMobile />
           </div>
         </D_Transition.Section>
-        <D_Transition.Section id="experience">
-          <D_Background backgroundClassName="bg-gradient-to-b from-white/55 via-white/80 to-white">
-            <div className=" hidden md:flex items-center h-screen gap-8 px-[10%] py-[2%]" >
-              <div className="w-1/2 " >
-                <MyResume />
+        <D_Transition.Section
+          className="items-center h-screen gap-8" id="experience">
+          <D_Background backgroundClassName="bg-gradient-to-b from-white/58 via-white/70 to-white">
+            <div>
+              <div className=" hidden md:flex" >
+                <div className="w-1/2 " >
+                  <MyResume />
+                </div>
+                <div className="w-full" >
+                  <TechStack />
+                </div>
               </div>
-              <div className="w-full" >
-                <TechStack />
+              <div className="flex md:hidden">
+                <D_Carousel
+                  items={[
+                    (<MyResume />),
+                    (<div className="flex flex-col gap-6 w-full">
+                      <span className="text-black/70 text-3xl font-bold text-center" >Tech Stack</span>
+                      <TechStack />
+                    </div>)
+                  ]}
+                />
               </div>
             </div>
           </D_Background>
-          <div className="flex md:hidden bg-gradient-to-b from-black/10 via-transparent to-black" >
-            <D_Carousel
-              items={[
-                (<MyResume />),
-                (<div className="flex flex-col gap-6 w-full">
-                  <span className="text-black/70 text-3xl font-bold text-center" >Tech Stack</span>
-                  <TechStack />
-                </div>)
-              ]}
-            />
-          </div>
         </D_Transition.Section>
         <D_Transition.Section id="sign-in">
           <D_Background  >
@@ -69,6 +72,6 @@ export default function Home() {
           </D_Background>
         </D_Transition.Section>
       </D_Transition>
-    </D_Background>
+    </D_Background >
   )
 }

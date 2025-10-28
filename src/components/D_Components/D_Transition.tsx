@@ -1,13 +1,15 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface SectionProps {
     id: string;
     children: React.ReactNode;
+    className?: string;
 }
 
-const Section: React.FC<SectionProps> = ({ id, children }) => {
+const Section: React.FC<SectionProps> = ({ id, children, className }) => {
     return (
         <motion.section
             id={id}
@@ -25,7 +27,9 @@ const Section: React.FC<SectionProps> = ({ id, children }) => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
-            className="w-full min-h-screen flex items-center justify-center snap-start"
+            className={cn("w-full min-h-screen flex items-center justify-center snap-start",
+                className,
+            )}
         >
             <div className="w-full flex items-center justify-center">
                 {children}
@@ -38,7 +42,7 @@ const D_Transition: React.FC<{ children: React.ReactNode }> & {
     Section: typeof Section;
 } = ({ children }) => {
     return (
-        <div className="w-full overflow-y-scroll scroll-smooth snap-y snap-mandatory">
+        <div className="w-full overflow-y-scroll scroll-smooth overflow-x-clip snap-y snap-mandatory">
             {children}
         </div>
     );
