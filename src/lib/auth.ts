@@ -32,7 +32,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
         }),
     ],
-
+    secret: process.env.AUTH_SECRET,
     callbacks: {
         // ---- Add custom claims to JWT -------------------------------------------
         jwt({ token, user }) {
