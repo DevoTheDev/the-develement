@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import TechDisplay from "./TechDisplay";
-import D_Collapsible from "@/components/D_Components/D_Collapsible";
+import D_Accordion from "@/components/D_Components/D_Accordion";
 
 interface TechSection {
   label: string;
@@ -129,16 +129,14 @@ const TechStack: React.FC<TechStackProps> = ({
   return (
     <div
       className={`
-        w-full mx-auto p-4 sm:p-6 md:p-8
-        flex flex-col items-center
-        transition-all hover:scale-[1.02] transform
-        hover:shadow-md duration-200
-        rounded-2xl shadow-sm
-        backdrop-blur-xs
+        w-full flex flex-col
+        items-center align-middle p-8 rounded-xl
+        backdrop-blur-xs bg-white/10
       `}
       role="region"
       aria-label="Technology stack sections"
     >
+      <div className="w-full flex justify-end px-12 text-3xl text-black/60 font-bold" >Tech Stack</div>
       {techSections.map((section, index) => (
         <motion.div
           key={section.label}

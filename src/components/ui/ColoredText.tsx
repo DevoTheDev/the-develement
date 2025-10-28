@@ -34,10 +34,18 @@ const ColoredText: React.FC<ColoredTextProps> = ({
 
     return (
         <span
-            className={clsx(size, weight, shadow && 'drop-shadow', 'inline-block')}
+            className={clsx(
+                size,
+                weight,
+                shadow && 'drop-shadow',
+                'inline-block',
+                isGradient && 'gradient-animate'
+            )}
             style={style}
-        >{children}
+        >
+            {children}
         </span>
+
     );
 };
 

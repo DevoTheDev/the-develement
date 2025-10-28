@@ -29,25 +29,22 @@ export default function Home() {
           </div>
         </D_Transition.Section>
         <D_Transition.Section
-          className="items-center h-screen gap-8" id="experience">
+          className="items-center h-max gap-8" id="experience">
           <D_Background backgroundClassName="bg-gradient-to-b from-white/58 via-white/70 to-white">
-            <div>
-              <div className=" hidden md:flex" >
-                <div className="w-1/2 " >
-                  <MyResume />
-                </div>
-                <div className="w-full" >
-                  <TechStack />
-                </div>
-              </div>
-              <div className="flex md:hidden">
+            <div className="w-full flex justify-center" >
+              <div className="flex md:w-3/4 w-full">
                 <D_Carousel
                   items={[
-                    (<MyResume />),
-                    (<div className="flex flex-col gap-6 w-full">
-                      <span className="text-black/70 text-3xl font-bold text-center" >Tech Stack</span>
-                      <TechStack />
-                    </div>)
+                    (
+                      <div className="w-full px-12">
+                        <TechStack padded />
+                      </div>
+                    ),
+                    (
+                      <div className="w-full md:px-[15%] overflow-y-clip" >
+                        <MyResume />
+                      </div>
+                    ),
                   ]}
                 />
               </div>
