@@ -1,14 +1,6 @@
 import { SignInForm } from "@/app/(auth)/sign-in/_components/sign-in-form";
-import { auth } from "@/lib/auth";
-import { Role } from "$/generated/prisma";
-import { redirect } from "next/navigation";
 
 const Page = async () => {
-  const session = await auth();
-  if (session?.user?.role === Role.ADMIN)
-    redirect("/admin");
-  if (session?.user?.role === Role.USER) redirect("/client");
-
   return (
     <div className="flex min-h-screen items-center justify-center">
       <SignInForm />

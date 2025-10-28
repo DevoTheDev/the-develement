@@ -10,6 +10,7 @@ import { ControlledInput } from "@/components/ui/controlled/controlled-input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { loginAction } from "../_services/actions";
 
 type SignFormProps = {
   whiteSnow?: boolean
@@ -33,6 +34,7 @@ const SignInForm = ({
     return (
       <FormProvider {...form}>
         <form
+          action={loginAction}
           className="w-full max-w-96 space-y-5 rounded-md border px-10 py-12 backdrop-blur-xs"
           onSubmit={form.handleSubmit(onSubmit)}
         >
