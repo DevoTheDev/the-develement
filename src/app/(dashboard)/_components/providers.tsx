@@ -18,8 +18,8 @@ const queryClient = new QueryClient({
                 if (e.message === "NEXT_REDIRECT") return;
                 toast.error(e.message);
             },
-            onSuccess: () => {
-                toast.error("Operation was successful.");
+            onSuccess: (e) => {
+                toast.error(JSON.stringify(e));
             },
         },
     },
