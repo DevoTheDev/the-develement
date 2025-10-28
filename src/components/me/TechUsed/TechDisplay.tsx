@@ -67,11 +67,11 @@ const TechDisplay: React.FC<TechDisplayProps> = ({ centered = false, label = tru
       <div
         key={data.key}
         className={clsx(
-          "relative flex justify-center items-center p-0 md:p-2 lg:p-3 w-max rounded-3xl gap-2",
+          "relative flex text-black/75 justify-center items-center py-3 px-4 w-max rounded-3xl gap-2",
           "transition-all duration-200 transform",
-          "cursor-pointer md:hover:bg-black/10 text-black",
-          "hover:scale-[1.05]",
-          { "px-8": padded },
+          "cursor-pointer md:hover:bg-black/25 text-black",
+          "hover:scale-[1.05] hover:text-white/80 ease-in-out duration-300",
+          { "px-6": padded },
         )}
       >
         <a
@@ -89,14 +89,14 @@ const TechDisplay: React.FC<TechDisplayProps> = ({ centered = false, label = tru
             className="object-contain"
           />
         </a>
-        {label && <span className="text-center text-xs lg:flex md:hidden hidden">{data.label}</span>}
+        {label && <span className="text-center text-xs font-bold lg:flex md:hidden hidden">{data.label}</span>}
       </div>
     );
   };
 
   return (
     <div
-      className={className ? className : 'md:flex md:flex-wrap grid grid-cols-5 gap-0 md:gap-4'}
+      className={className ? className : 'grid grid-cols-6 '}
       role="list"
       aria-label="Technology stack"
     >

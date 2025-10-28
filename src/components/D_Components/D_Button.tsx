@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+import React, { ReactNode } from 'react'
 import * as Lucide from 'lucide-react';
 import Link from 'next/link';
 import {
@@ -22,7 +22,8 @@ export type D_ButtonProps = Partial<ClassName> & {
   onMobile?: 'hideIcon' | 'hideLabel'
   disableDefault?: boolean
   isLoading?: boolean
-  download?: boolean
+  download?: boolean,
+  children?: ReactNode;
 }
 
 const D_Button = ({
@@ -37,6 +38,7 @@ const D_Button = ({
   disableDefault,
   isLoading,
   download,
+  children,
 }: D_ButtonProps) => {
 
 
@@ -67,6 +69,7 @@ const D_Button = ({
                   <Icon className={`h-${iconSize} w-${iconSize} opacity-85`} />
                 )}
                 {label && !hideLabel && (<span className='w-full'>{label}</span>)}
+                {children && (<>{children}</>)}
               </>)
             }
           </div>

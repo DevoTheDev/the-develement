@@ -1,9 +1,10 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
-import D_Collapsible, { D_CollapsibleProps } from "./D_Collapsible";
+import React, { useState } from "react";
+import D_Collapsible from "./D_Collapsible";
 import { ClassName } from "./D_types";
 
 export type D_AccordionProps = ClassName & {
+    accordionHead: React.ReactNode
     sections: {
         head: {
             title: string,
@@ -15,6 +16,7 @@ export type D_AccordionProps = ClassName & {
 
 
 const D_Accordion = ({
+    accordionHead,
     sections,
     className
 }: D_AccordionProps) => {
@@ -23,6 +25,7 @@ const D_Accordion = ({
 
     return (
         <div className={className}>
+            {accordionHead}
             {sections.map((sect, i) => {
                 const isOpen = openSection === sect.head.title;
 
