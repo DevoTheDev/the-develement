@@ -1,19 +1,23 @@
-import { signIn, signOut } from "@/app/(auth)/sign-in/_services/mutations";
+import { signInAction, signOutAction } from "@/app/(auth)/sign-in/_services/mutations";
 import { SignInSchema } from "@/app/(auth)/sign-in/_types/signInSchema";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 const useSignIn = () => {
   return useMutation({
     mutationFn: async (data: SignInSchema) => {
-      await signIn(data);
+      await signInAction(data);
     },
+    onSuccess: () => {
+      toast.success("Signed in successfully. Welcome back!")
+    }
   });
 };
 
 const useSignOut = () => {
 
   return useMutation({
-    mutationFn: signOut,
+    mutationFn: signOutAction,
     onSuccess: () => {
     },
   });
