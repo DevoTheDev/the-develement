@@ -9,11 +9,8 @@ const useSignUp = () => {
     mutationFn: async (data: SignUpSchema) => {
       await signUp(data);
     },
-    onSuccess: () => {
-      toast.success("Signed up successfully.");
-    },
-    onError: (e: any) => {
-      toast.error(`Error on Sign In: ${JSON.stringify(e)}`)
+    onSuccess: (e: any) => {
+      toast.success(JSON.stringify(e))
     }
   });
 };
