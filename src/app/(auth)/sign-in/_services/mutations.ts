@@ -5,8 +5,10 @@ import { signInSchema } from "@/app/(auth)/sign-in/_types/signInSchema";
 import { AuthError } from "next-auth";
 import { redirect } from "next/navigation";
 import { signIn, signOut } from "@/lib/auth"; // your auth.ts with NextAuth()
+import { toast } from "sonner";
 
 export async function signInAction(data: unknown) {
+  toast.success("Sign In FN fired")
   const parsed = signInSchema.safeParse(data);
   if (!parsed.success) {
     // Return errors to client (you can throw or return)
