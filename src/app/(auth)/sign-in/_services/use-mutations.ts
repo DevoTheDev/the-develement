@@ -10,6 +10,9 @@ const useSignIn = () => {
     },
     onSuccess: () => {
       toast.success("Signed in successfully. Welcome back!")
+    },
+    onError: (e: any) => {
+      toast.error(`Error on Sign In: ${JSON.stringify(e)}`)
     }
   });
 };

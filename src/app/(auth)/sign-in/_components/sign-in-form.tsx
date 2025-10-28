@@ -28,7 +28,6 @@ const SignInForm = ({
 
   const onSubmit: SubmitHandler<SignInSchema> = (data) => {
     signInMutation.mutate(data);
-    redirect("/admin")
   };
 
   const formRender = () => {
