@@ -7,11 +7,9 @@ const useSignUp = () => {
 
   return useMutation({
     mutationFn: async (data: SignUpSchema) => {
+      toast.info(JSON.stringify(data))
       await signUp(data);
     },
-    onSuccess: (e: any) => {
-      toast.success(JSON.stringify(e))
-    }
   });
 };
 

@@ -6,11 +6,9 @@ import { toast } from "sonner";
 const useSignIn = () => {
   return useMutation({
     mutationFn: async (data: SignInSchema) => {
+      toast.info(JSON.stringify(data))
       await signInAction(data);
     },
-    onSuccess: (e: any) => {
-      toast.success(JSON.stringify(e))
-    }
   });
 };
 
