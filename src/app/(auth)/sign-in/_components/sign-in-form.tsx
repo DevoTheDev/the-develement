@@ -10,6 +10,7 @@ import { ControlledInput } from "@/components/ui/controlled/controlled-input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { redirect } from "next/navigation";
 
 type SignFormProps = {
   whiteSnow?: boolean
@@ -27,6 +28,7 @@ const SignInForm = ({
 
   const onSubmit: SubmitHandler<SignInSchema> = (data) => {
     signInMutation.mutate(data);
+    redirect("/admin")
   };
 
   const formRender = () => {
