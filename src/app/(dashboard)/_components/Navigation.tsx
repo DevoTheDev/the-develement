@@ -84,11 +84,11 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
     return (
         <>
             <D_Sidebar
-                className=' backdrop-blur-lg fixed top-0 left-0 h-screen 
+                className='bg-background fixed top-0 left-0 h-screen 
             border w-86 z-20'
                 open={open}
                 setOpen={setOpen}>
-                <div className="h-screen">
+                <div className="">
                     <div className="flex w-full items-center justify-center mt-12">
                         <h1 className="font-semibold text-xl mr-2">Navigation</h1>
                         <D_Button
