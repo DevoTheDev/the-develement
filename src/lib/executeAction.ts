@@ -2,7 +2,6 @@
 import { getErrorMessage } from "@/lib/getErrorMessage";
 // Helper from Next.js to detect redirect-related errors
 import { isRedirectError } from "next/dist/client/components/redirect-error";
-
 // Generic type for async actions, ensuring type safety
 type Options<T> = {
     actionFn: () => Promise<T>;

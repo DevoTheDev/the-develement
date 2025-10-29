@@ -63,48 +63,6 @@ model FoodServingUnit {
   updatedAt     DateTime    @updatedAt
 }
 
-model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  password  String
-  role      Role     @default(USER)
-  meals     Meal[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-// model Workout {
-//   id             Int           @id @default(autoincrement())
-//   name           String
-//   caloriesBurned Int
-//   user           User?         @relation(fields: [userId], references: [id])
-//   userId         Int?
-//   exercises      Exercise[]
-//   stress         WorkoutStress
-// }
-
-// enum WorkoutStress {
-//   STRENGTH
-//   SIZE
-//   ENDURANCE
-// }
-
-model Exercise {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String?
-  sets        Float?
-  reps        Float?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now()) @updatedAt
-}
-
-enum Role {
-  USER
-  ADMIN
-}
-
 model Meal {
   id        Int        @id @default(autoincrement())
   dateTime  DateTime
@@ -127,4 +85,207 @@ model MealFood {
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
   servingUnitId Int
+}
+
+/**
+ * ────────────────────────────────
+ * USER
+ * ────────────────────────────────
+ */
+model User {
+  id            Int          @id @default(autoincrement())
+  name          String
+  email         String       @unique
+  password      String
+  role          Role         @default(USER)
+  meals         Meal[]
+  workoutPlan   WorkoutPlan? // Inverse side – no fields/references
+  workoutPlanId Int?         @unique
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@index([workoutPlanId])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+/**
+ * ────────────────────────────────
+ * WORKOUTS & EXERCISES
+ * ────────────────────────────────
+ */
+model WorkoutPlan {
+  id        Int       @id @default(autoincrement())
+  name      String
+  user      User?     @relation(fields: [userId], references: [id]) // Owns FK
+  userId    Int?      @unique
+  workouts  Workout[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+model Workout {
+  id             Int               @id @default(autoincrement())
+  name           String
+  caloriesBurned Int? // optional total burn
+  workoutPlan    WorkoutPlan?      @relation(fields: [workoutPlanId], references: [id])
+  workoutPlanId  Int?
+  exercises      WorkoutExercise[]
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+}
+
+/**
+ * ───── Base exercise (shared name / description) ─────
+ */
+model Exercise {
+  id               Int                    @id @default(autoincrement())
+  name             String                 @unique
+  description      String?
+  equipment        EquipmentAvailability?
+  targetMuscles    Muscles[]
+  targetJoints     Joints[]
+  // Variations of this base exercise
+  variations       ExerciseVariation[]
+  // Direct usage (when a variation is not needed)
+  workoutExercises WorkoutExercise[]
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+}
+
+/**
+ * ───── Concrete variation (Barbell Curl, Dumbbell Curl, …) ─────
+ */
+model ExerciseVariation {
+  id              Int               @id @default(autoincrement())
+  baseExercise    Exercise          @relation(fields: [baseExerciseId], references: [id])
+  baseExerciseId  Int
+  weightVariation WeightVariation
+  grip            Grips? // optional – many exercises don’t need a grip
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  WorkoutExercise WorkoutExercise[]
+
+  @@unique([baseExerciseId, weightVariation, grip])
+}
+
+/**
+ * ───── What the user actually performed in a workout ─────
+ */
+model WorkoutExercise {
+  id                      Int                @id @default(autoincrement())
+  workout                 Workout            @relation(fields: [workoutId], references: [id])
+  // Either a base exercise (no variation) OR a concrete variation
+  exercise                Exercise?          @relation(fields: [exerciseId], references: [id])
+  exerciseId              Int?
+  variation               ExerciseVariation? @relation(fields: [variationId], references: [id])
+  variationId             Int?
+  sets                    Int
+  reps                    Int
+  weight                  Float? // kg / lbs
+  estimatedCompletionTime Int? // seconds
+  stress                  WorkoutStress?
+  workoutId               Int
+  createdAt               DateTime           @default(now())
+  updatedAt               DateTime           @updatedAt
+
+  @@unique([workoutId, exerciseId, variationId, sets, reps])
+}
+
+/**
+ * ────────────────────────────────
+ * ENUMS
+ * ────────────────────────────────
+ */
+
+enum MuscleGroup {
+  ARMS
+  BACK
+  CHEST
+  CORE
+  FRONT_LEGS
+  BACK_LEGS
+}
+
+enum EquipmentAvailability {
+  BODYWEIGHT
+  FREEWEIGHTS
+  CABLES
+  MACHINES
+  ENHANCED_BODYWEIGHT
+  GYM
+}
+
+enum Joints {
+  WRISTS
+  ELBOWS
+  SHOULDERS
+  NECK
+  HIPS_WAIST
+  KNEES
+  ANKLES
+}
+
+enum Grips {
+  CLOSE_GRIP
+  WIDE_GRIP
+  HAMMER_GRIP
+  PALM_UP
+  PALM_DOWN
+}
+
+enum Muscles {
+  BICEPS
+  TRICEPS
+  TOP_FOREARMS
+  BACK_FOREARMS
+  FRONT_SHOULDERS
+  CENTER_SHOULDERS
+  BACK_SHOULDERS
+  CHEST
+  TRAPS
+  UPPER_BACK
+  LOWER_BACK
+  HIPS
+  UPPER_ABS
+  CENTER_ABS
+  LOWER_ABS
+  OBLIQUES
+  QUADS
+  ASS
+  BACK_CALVES
+  FRONT_CALVES
+  HAMSTRINGS
+  HANDS
+  NECK
+}
+
+enum WeightType {
+  HEAVY_WEIGHT
+  MEDIUM_WEIGHT
+  ENHANCED_WEIGHT
+}
+
+enum WeightVariation {
+  BARBELL
+  DUMBELL
+  CABLE
+  BODY
+}
+
+enum WorkoutStress {
+  MUSCLE_STRENGTH
+  MUSCLE_SIZE
+  MUSCLE_ENDURANCE
+  JOINT_STRENGTH
+  JOINT_SIZE
+  JOINT_ENDURANCE
+  CARDIO
+  FLEXIBILITY
+  WARMUP
 }

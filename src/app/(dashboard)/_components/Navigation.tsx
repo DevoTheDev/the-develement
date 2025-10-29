@@ -44,11 +44,6 @@ export const ROUTE_GROUPS: RouteGroupType[] = [
                 label: "Serving Units",
                 icon: "Ruler",
             },
-            {
-                href: "/client/foods-management/meals",
-                label: "Meals",
-                icon: "Utensils",
-            },
         ],
     },
     {

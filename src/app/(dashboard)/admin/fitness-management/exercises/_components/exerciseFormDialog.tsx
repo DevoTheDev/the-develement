@@ -9,7 +9,6 @@ import { ExerciseSchema, exerciseDefaultValues, exerciseSchema } from "../_types
 import { useExercise } from "../_services/useExerciseQueries";
 import { DrawerDialog } from "@/app/(dashboard)/_components/DrawerDialog";
 import { DialogFooter } from "@/components/ui/dialog";
-import DevButton from "@/components/ui/DevButton";
 import { Button } from "@/components/ui/button";
 import D_Button from "@/components/D_Components/D_Button";
 
@@ -94,20 +93,6 @@ const ExerciseForm = () => {
                                 className="w-full"
                                 placeholder="Enter Exercise description"
                             />
-                            <div className="flex flex-col mx-auto" >
-                                <HookForm.Counter<ExerciseSchema>
-                                    name="sets"
-                                    label="Sets"
-                                    min={0}
-                                    max={99}
-                                />
-                                <HookForm.Counter<ExerciseSchema>
-                                    name="reps"
-                                    label="Reps"
-                                    min={0}
-                                    max={99}
-                                />
-                            </div>
                         </div>
                     </FormProvider>
                     <DialogFooter>

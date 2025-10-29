@@ -1,31 +1,52 @@
-import { patterns } from "@/lib/regexp-patterns";
+import { EquipmentAvailability, GRIPS, Joints, Muscles, WeightVariation } from "$/generated/prisma";
 import { regexSchema, requiredStringSchema } from "@/lib/zodSchema";
-import { z } from "zod"; // Import Zod for schema validation
+import { discriminatedUnion, z } from "zod"; // Import Zod for schema validation
 
-// Define exerciseSchema to match Prisma Exercise model
+// === Zod Enums (mirrored from Prisma) ===
+const equipmentEnum = z.nativeEnum(EquipmentAvailability).optional();
+const weightVariationEnum = z.nativeEnum(WeightVariation);
+const gripEnum = z.nativeEnum(GRIPS).nullable().optional();
+const musclesEnum = z.array(z.nativeEnum(Muscles)).default([]);
+const jointsEnum = z.array(z.nativeEnum(Joints)).default([]);
+
+// === Variation Schema ===
+const variationSchema = z.object({
+    weightVariation: weightVariationEnum,
+    grip: gripEnum,
+});
+
+// === Base Exercise Schema ===
+const baseExerciseSchema = z.object({
+    name: requiredStringSchema,
+    description: requiredStringSchema,
+    equipment: equipmentEnum,
+    targetMuscles: musclesEnum,
+    targetJoints: jointsEnum,
+    variations: z.array(variationSchema).default([]),
+});
+
 const exerciseSchema = z.intersection(
-    z.object({
-        name: requiredStringSchema,
-        description: requiredStringSchema,
-        sets: regexSchema(patterns.zeroTo9999),
-        reps: regexSchema(patterns.zeroTo9999),
-    }),
-    z.discriminatedUnion("action", [ // Discriminated union for action
-        z.object({ action: z.literal("create") }), // Create: no id
-        z.object({ action: z.literal("update"), id: z.number() }), // Update: requires id
+    baseExerciseSchema,
+    z.discriminatedUnion("action", [
+        z.object({ action: z.literal("create") }),
+        z.object({
+            action: z.literal("update"),
+            id: z.number(),
+        }),
     ])
 );
-
-// Infer TypeScript type from schema
+// === TypeScript Type ===
 type ExerciseSchema = z.infer<typeof exerciseSchema>;
 
-// exerciseSchema.ts
+// === Default Values (for forms) ===
 const exerciseDefaultValues: ExerciseSchema = {
     action: "create",
     name: "",
     description: "",
-    sets: "",
-    reps: "",
+    equipment: undefined,
+    targetMuscles: [],
+    targetJoints: [],
+    variations: [],
 };
 
 // Export schema, type, and default values

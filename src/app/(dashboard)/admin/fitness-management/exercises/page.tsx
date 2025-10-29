@@ -1,6 +1,7 @@
 import React from 'react'
 import ExerciseCards from './_components/exercise-cards'
 import { ExerciseForm } from './_components/exerciseFormDialog'
+import { ExerciseFilter } from './_components/exerciseFilter'
 
 
 const page = () => {
@@ -11,6 +12,7 @@ const page = () => {
                 <h1 className="text-3xl font-semibold">Exercises</h1>
                 <ExerciseForm />
             </div>
+            <ExerciseFilter />
             <ExerciseCards />
 
         </div>
