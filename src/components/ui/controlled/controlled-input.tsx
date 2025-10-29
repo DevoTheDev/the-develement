@@ -22,9 +22,9 @@ const ControlledInput = <T extends FieldValues>({
     const { control } = useFormContext<T>();
 
     return (
-        <div className={cn("w-full", containerClassName)}>
+        <div className={"w-full"}>
             {!!label && (
-                <Label className="mb-2 text-white/50" htmlFor={name}>
+                <Label className="mb-2" htmlFor={name}>
                     {label}
                 </Label>
             )}
@@ -33,7 +33,7 @@ const ControlledInput = <T extends FieldValues>({
                 name={name}
                 control={control}
                 render={({ field, fieldState: { error } }) => (
-                    <div className={className}>
+                    <div className={containerClassName}>
                         <Input
                             type={type}
                             id={name}

@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react'
-import { cn } from '@/lib/utils'
 import { ClassName } from './D_types'
 
 type D_CardProps = Partial<ClassName> & {
@@ -15,7 +14,7 @@ const D_Card = ({
     className,
 }: D_CardProps) => {
     return (
-        <div className={cn(className, 'flex flex-col justify-center items-center')} >
+        <div className={className}>
             {header}
             {body}
             {footer}
