@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { ControlledInput } from "@/components/ui/controlled/controlled-input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 
 const SignUpForm = () => {
@@ -21,6 +22,7 @@ const SignUpForm = () => {
 
   const onSubmit: SubmitHandler<SignUpSchema> = (data) => {
     signUpMutation.mutate(data);
+    redirect('/sign-in')
   };
 
   return (
