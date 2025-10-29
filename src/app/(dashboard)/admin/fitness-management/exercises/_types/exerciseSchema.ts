@@ -1,11 +1,11 @@
-import { EquipmentAvailability, GRIPS, Joints, Muscles, WeightVariation } from "$/generated/prisma";
+import { EquipmentAvailability, Grips, Joints, Muscles, WeightVariation } from "$/generated/prisma";
 import { regexSchema, requiredStringSchema } from "@/lib/zodSchema";
 import { discriminatedUnion, z } from "zod"; // Import Zod for schema validation
 
 // === Zod Enums (mirrored from Prisma) ===
 const equipmentEnum = z.nativeEnum(EquipmentAvailability).optional();
 const weightVariationEnum = z.nativeEnum(WeightVariation);
-const gripEnum = z.nativeEnum(GRIPS).nullable().optional();
+const gripEnum = z.nativeEnum(Grips).nullable().optional();
 const musclesEnum = z.array(z.nativeEnum(Muscles)).default([]);
 const jointsEnum = z.array(z.nativeEnum(Joints)).default([]);
 
